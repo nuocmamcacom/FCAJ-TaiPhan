@@ -1,0 +1,25 @@
+﻿---
+title: "Worklog"
+date: 2024-01-01
+weight: 1
+chapter: false
+pre: " <b> 1. </b> "
+---
+
+
+This worklog documents my internship journey from **17/04/2026 to 17/07/2026**. The program is organized into 12 weekly sections, covering AWS fundamentals, cloud architecture, hands-on labs, workshop implementation, and final documentation.
+
+| Week | Period | Main Focus |
+| --- | --- | --- |
+| [Week 1](1.1-week1/) | 17/04/2026 - 23/04/2026 | Getting familiar with AWS and basic cloud services |
+| [Week 2](1.2-week2/) | 24/04/2026 - 30/04/2026 | EC2, VPC, load balancing, and auto scaling |
+| [Week 3](1.3-week3/) | 01/05/2026 - 07/05/2026 | RDS, DynamoDB, and database services |
+| [Week 4](1.4-week4/) | 08/05/2026 - 14/05/2026 | S3, CloudFront, and storage optimization |
+| [Week 5](1.5-week5/) | 15/05/2026 - 21/05/2026 | IAM, KMS, Secrets Manager, and security best practices |
+| [Week 6](1.6-week6/) | 22/05/2026 - 28/05/2026 | Containers, ECR, ECS, Fargate, and Lambda |
+| [Week 7](1.7-week7/) | 29/05/2026 - 04/06/2026 | SNS, SQS, EventBridge, and event-driven architecture |
+| [Week 8](1.8-week8/) | 05/06/2026 - 11/06/2026 | CloudWatch, X-Ray, monitoring, and observability |
+| [Week 9](1.9-week9/) | 12/06/2026 - 18/06/2026 | CloudFormation, Terraform, and infrastructure as code |
+| [Week 10](1.10-week10/) | 19/06/2026 - 25/06/2026 | API Gateway, AppSync, and application integration |
+| [Week 11](1.11-week11/) | 26/06/2026 - 02/07/2026 | Glue, Athena, analytics, and reporting |
+| [Week 12](1.12-week12/) | 03/07/2026 - 17/07/2026 | Final solution design, presentation, documentation, and wrap-up |
