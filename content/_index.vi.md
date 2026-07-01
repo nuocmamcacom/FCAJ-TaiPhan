@@ -25,7 +25,7 @@ chapter: false
 
 &emsp; **Thời gian thực tập:** Từ ngày 17/4/2026 đến ngày 17/7/2026
 
-![Ảnh đại diện của bạn](/static/images/avatar.png)
+![Ảnh đại diện của bạn](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/images/avatar.png)
 
 
 
