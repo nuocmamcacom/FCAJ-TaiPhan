@@ -28,7 +28,7 @@ chapter: false
 
 &emsp; **Internship Duration:** From 17/4/2026 to 17/7/2026
 
-![Your profile picture](/static/images/avatar.png)
+![Your profile picture](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/images/avatar.png)
 
 ### Report Content
 
