@@ -45,3 +45,7 @@ pre: " <b> 1.3. </b> "
   * Implemented backup and restore procedures
   * Tested failover mechanisms
   * Created recovery runbooks
+
+**Practical Evidence:**
+![RDS Created](/static/images/1-Worklog/RDS.png)
+![DynamoDB](/static/images/1-Worklog/DynamoDB.png)

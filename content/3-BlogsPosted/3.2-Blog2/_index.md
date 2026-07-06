@@ -1,28 +1,37 @@
 ---
-title: "Blog 2"
-date: 2024-01-01
-weight: 1
-chapter: false
-pre: " <b> 3.2. </b> "
+title: "[AWS Security] Serverless Security is Not a Single Layer"
+date: 2026-07-06
+weight: 2
+draft: false
 ---
 
-# SESSION POLICIES IN AMAZON EKS POD IDENTITY
+## [AWS Security] Serverless Security is Not a Single Layer
 
-Amazon EKS Pod Identity has recently added the session policies feature, allowing you to narrow IAM permissions flexibly and precisely for each pod without needing to create many separate IAM roles. This is an important step forward that helps apply the principle of least privilege more effectively in large-scale Kubernetes environments.
+Serverless reduces the burden of server management, but it doesn't mean the system is automatically secure. With serverless microservices, every API, Lambda function, secret, or database can become a vulnerability if misconfigured.
 
-Key points to know:
+Therefore, security should not rely solely on a single layer like WAF or API Gateway. The architecture should apply **defense-in-depth**, meaning multiple successive layers of protection so that if one layer is breached, the remaining layers still help mitigate the damage.
 
-* A session policy is an inline IAM policy specified when creating or updating a Pod Identity association.
-* Effective permissions = intersection between the IAM role permissions and the session policy → the session policy can only narrow permissions, not expand them.
-* Helps avoid over-permissioning when reusing a single IAM role for multiple workloads with different needs.
-* Supports both same-account and cross-account (via IAM role chaining).
-* Significantly reduces the number of IAM roles that need to be managed, helping avoid hitting IAM quota limits in large clusters.
-* Easily configured through the AWS Management Console, AWS CLI, or AWS SDK when creating an association between a Kubernetes ServiceAccount and an IAM role.
+### 7 Key Protection Layers in AWS Architecture
 
-This feature is especially useful when you have many applications running on the same IAM role but need different permission restrictions (for example: one pod only reads a specific S3 bucket, another pod only calls certain APIs).
+*   **Edge Protection:** Protect inbound traffic using CloudFront, AWS WAF, and AWS Shield.
+*   **Identity Protection:** Authenticate users and control access using Amazon Cognito.
+*   **API Protection:** Secure APIs, validate tokens, implement rate limiting, and encrypt connections using Amazon API Gateway.
+*   **Network Isolation:** Isolate sensitive resources using VPC, Security Groups, Network ACLs, and VPC Endpoints.
+*   **Compute Security:** Secure Lambda using IAM least privilege, KMS, resource-based policies, and code signing.
+*   **Secrets Protection:** Manage credentials, API keys, and sensitive information using AWS Secrets Manager.
+*   **Data Protection:** Secure data using DynamoDB encryption, access controls, and backups.
 
-...Image...
+### Continuous Monitoring
 
-...Link...
+In addition to the 7 layers above, the system requires continuous monitoring using GuardDuty, CloudTrail, CloudWatch, Security Hub, and Amazon Bedrock to detect anomalies, track behavior, and support security analysis.
 
-...Guide...
+### The Advantage
+
+This architecture does not depend on a single layer of protection. If the WAF is bypassed, the system still has API Gateway, Cognito, IAM, Secrets Manager, and monitoring working behind it to reduce the blast radius.
+
+### Conclusion
+
+Serverless reduces server management overhead but does not eliminate security responsibilities. For production systems, security should be designed from the ground up—covering traffic, authentication, APIs, networking, Lambda, secrets, data, and monitoring.
+
+---
+**Reference:** [AWS Security Blog - Building an AI-powered defense-in-depth security architecture for serverless microservices](https://aws.amazon.com/vi/blogs/security/building-an-ai-powered-defense-in-depth-security-architecture-for-serverless-microservices/)

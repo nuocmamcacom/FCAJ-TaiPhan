@@ -45,3 +45,10 @@ pre: " <b> 1.5. </b> "
   * Set up CloudWatch alarms for security events
   * Created security event playbooks
   * Demonstrated incident response procedures
+
+**Practical Evidence:**
+
+![IAM](/static/images/1-Worklog/IAM.png)
+![MFA](/static/images/1-Worklog/MFA.png)
+![S3KMS](/static/images/1-Worklog/S3KMS.png)
+![SecretsManager](/static/images/1-Worklog/SecretsManager.png)

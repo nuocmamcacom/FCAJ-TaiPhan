@@ -45,3 +45,6 @@ pre: " <b> 1.4. </b> "
   * Reduced data transfer costs using CloudFront
   * Automated data archival to Glacier
   * Achieved 90% reduction in storage costs
+
+**Practical Evidence:**
+![S3](/static/images/1-Worklog/S3.png)

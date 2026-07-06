@@ -45,3 +45,8 @@ pre: " <b> 1.4. </b> "
   * Giảm data transfer costs sử dụng CloudFront
   * Tự động hóa data archival tới Glacier
   * Đạt được 90% giảm chi phí storage
+
+**Minh chứng thực hành:**
+
+![S3](/static/images/1-Worklog/S3.png)
+

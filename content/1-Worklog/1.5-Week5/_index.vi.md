@@ -45,3 +45,10 @@ pre: " <b> 1.5. </b> "
   * Thiết lập CloudWatch alarms cho security events
   * Tạo security event playbooks
   * Thể hiện incident response procedures
+
+**Minh chứng thực hành:**
+
+![IAM](/static/images/1-Worklog/IAM.png)
+![MFA](/static/images/1-Worklog/MFA.png)
+![S3KMS](/static/images/1-Worklog/S3KMS.png)
+![SecretsManager](/static/images/1-Worklog/SecretsManager.png)

@@ -45,3 +45,9 @@ pre: " <b> 1.3. </b> "
   * Triển khai backup và restore procedures
   * Kiểm tra failover mechanisms
   * Tạo recovery runbooks
+
+**Minh chứng thực hành:**
+
+![RDS Created](/static/images/1-Worklog/RDS.png)
+![DynamoDB](/static/images/1-Worklog/DynamoDB.png)
+

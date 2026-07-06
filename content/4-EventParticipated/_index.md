@@ -1,33 +1,29 @@
 ---
-title: "Events Participated"
+title: "Attended Events"
 date: 2024-01-01
 weight: 4
 chapter: false
 pre: " <b> 4. </b> "
 ---
 
+During my internship, I participated in 2 events. Each event was a memorable experience filled with new, interesting, and useful knowledge, along with great gifts and wonderful moments.
 
-### [Event 1](4.1-Event1/)  
-&emsp;**Event Name:** FCAJ Community Day (Highlight session: Context Is Everything - Making AI work for you)
+## [Event 1](4.1-Event1/)
 
-&emsp;**Date & Time:** May 23, 2026, 8:30 AM - 12:00 PM
+&emsp;**Event Name:** FCAJ Community Day.
 
-&emsp;**Location:** 26th Floor, Bitexco Tower, 02 Hai Trieu Street, Saigon Ward, Ho Chi Minh City  
+&emsp;**Time:** 9:00 AM – 12:00 PM, May 23, 2026.
 
-&emsp;**Role:** Attendee  
+&emsp;**Location:** 26th Floor, Bitexco Financial Tower, 02 Hai Trieu Street, Saigon Ward, Ho Chi Minh City.
 
-&emsp;**Brief Decription:** The event was an intensive tech meetup focused on the practical applications of AI and Cloud technologies. Hosted by industry experts, the agenda covered cutting-edge topics including optimizing AI performance through context, utilizing AI assistants, leveraging Amazon CloudFront, and handling non-determinism in Large Language Models (LLMs). It also featured deep dives into Enterprise Multi-Agent systems and inspiring hackathon case studies.
+&emsp;**Role:** Attendee.
 
-&emsp;**Outcomes and Value Gained:** Attending this event significantly broadened my perspective on how AI and Cloud services are integrated into real-world enterprise architectures. I gained valuable insights into optimizing LLMs and deploying scalable systems, which strongly reinforces my software development and quality assurance knowledge. Additionally, the event provided an excellent opportunity to network with experienced professionals and stay updated with the latest industry trends.
+## [Event 2](4.2-Event2/)
 
-&emsp;**Significance:** This listing helps demonstrate my proactive participation in the tech community, my eagerness to continuously update my technical knowledge, and the communication and networking soft skills I have gained from engaging in professional events outside the workplace.
----
+&emsp;**Event Name:** FCAJ Community Day.
 
-### [Event 2](4.2-Event2/)  
-&emsp;**Event Name:** GenAI-powered App-DB Modernization workshop  
+&emsp;**Time:** 9:00 AM – 12:00 PM, June 27, 2026.
 
-&emsp;**Date & Time:** 09:00, August 13, 2025  
+&emsp;**Location:** 26th Floor, Bitexco Financial Tower, 02 Hai Trieu Street, Saigon Ward, Ho Chi Minh City.
 
-&emsp;**Location:** 26th Floor, Bitexco Tower, 02 Hai Trieu Street, Saigon Ward, Ho Chi Minh City  
-
-&emsp;**Role:** Attendee  
+&emsp;**Role:** Attendee.

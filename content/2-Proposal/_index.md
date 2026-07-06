@@ -1,413 +1,238 @@
 ---
 title: "Proposal"
-date: 2026-04-17
+date: 2026-05-14
 weight: 2
 chapter: false
 pre: " <b> 2. </b> "
 ---
 
-# Comprehensive Multi-Tier E-Commerce Platform with AWS
-## A Production-Ready Serverless Architecture for Scalable Business Operations
-
-### 1. Executive Summary
-
-This project proposes the design and deployment of a **complete, production-ready e-commerce platform** using AWS cloud services. The platform demonstrates practical application of AWS best practices across compute, storage, networking, security, analytics, and infrastructure automation.
-
-The solution is built entirely on serverless architecture, enabling automatic scaling, high availability, and cost optimization. It serves as a comprehensive learning project to consolidate knowledge gained throughout the 12-week intensive AWS training program.
-
-**Key Objectives:**
-- Design and deploy a multi-tier, highly available e-commerce system
-- Implement security best practices with IAM, KMS, and encryption
-- Create automated CI/CD pipelines for continuous deployment
-- Establish comprehensive monitoring and observability
-- Optimize for cost and performance
-
-### 2. Problem Statement & Solution Overview
-
-#### The Challenge
-Traditional monolithic e-commerce platforms struggle with:
-- **Scalability Issues**: Unable to handle traffic spikes during peak shopping seasons
-- **High Operational Overhead**: Requires dedicated DevOps teams for infrastructure management
-- **Cost Inefficiency**: Fixed infrastructure costs regardless of actual usage
-- **Limited Geographic Reach**: Single-region deployments with high latency for international users
-- **Manual Deployment Processes**: Time-consuming and error-prone updates
-
-#### Our Solution
-The **AWS Serverless E-Commerce Platform** addresses these challenges by:
-- **Auto-Scaling Compute**: Lambda functions automatically scale to handle millions of requests
-- **Global Distribution**: CloudFront CDN and multi-region deployment for low-latency access
-- **Infrastructure as Code**: Terraform and CloudFormation for reproducible, version-controlled infrastructure
-- **Complete Automation**: CI/CD pipelines eliminate manual deployments
-- **Enterprise Security**: IAM roles, encryption at rest and in transit, network isolation
-- **Real-Time Analytics**: Data pipeline from transactions to analytics dashboard
-
-### 3. Solution Architecture
-
-#### High-Level Architecture Components
-
-
-#### Key AWS Services Deployed
-
-**Compute & Containerization:**
-- AWS Lambda: REST API backend, event processors
-- Amazon ECS/Fargate: Containerized microservices
-- AWS API Gateway: API management and routing
-
-**Storage & Databases:**
-- Amazon S3: Web assets, product images, data lake
-- Amazon RDS: Relational data (PostgreSQL)
-- Amazon DynamoDB: Product catalog, user sessions
-- Amazon ElastiCache: Redis for caching
-
-**Networking & Content Delivery:**
-- Amazon VPC: Network isolation
-- AWS CloudFront: Global content distribution
-- Application Load Balancer: Container load balancing
-- Route 53: DNS and routing
-
-**Security & Compliance:**
-- AWS IAM: Identity and access management
-- AWS KMS: Key management
-- AWS Secrets Manager: Credential storage
-- VPC Security Groups: Network firewall
-
-**Messaging & Integration:**
-- Amazon SNS: Order notifications
-- Amazon SQS: Asynchronous task processing
-- AWS EventBridge: Event-driven workflows
-
-**Data & Analytics:**
-- Amazon Athena: SQL queries on data lake
-- AWS Glue: ETL data pipelines
-- Amazon Kinesis: Real-time data streaming
-- QuickSight: Business intelligence dashboards
-
-**Operations & Monitoring:**
-- Amazon CloudWatch: Metrics, logs, alarms
-- AWS X-Ray: Distributed tracing
-- AWS CloudTrail: API audit logging
-- CloudFormation/Terraform: Infrastructure as Code
-
-### 4. Technical Implementation Details
-
-#### 4.1 Frontend & Web Tier
-**Technology Stack:**
-- Next.js for server-side rendering
-- React for interactive UI
-- TailwindCSS for styling
-- Hosted on AWS Amplify
-
-**Features:**
-- Server-side rendering for SEO optimization
-- Progressive Web App (PWA) capabilities
-- Real-time product availability
-- One-click checkout with Cognito authentication
-
-#### 4.2 API & Application Layer
-**REST API:**
-- API Gateway + Lambda architecture
-- Endpoints:
-  - GET /products (product listing)
-  - GET /products/{id} (product details)
-  - POST /orders (create order)
-  - GET /orders/{id} (order tracking)
-  - POST /users/auth (authentication)
-
-**GraphQL API (Alternative):**
-- AWS AppSync for GraphQL
-- Real-time subscriptions for order status
-- Automatic query optimization
-
-**Microservices:**
-- Product Service (ECS/Fargate)
-- Order Service (ECS/Fargate)
-- Payment Service (Lambda + third-party integration)
-- Notification Service (SQS consumer)
-
-#### 4.3 Data Layer Architecture
-
-**Relational Database (RDS PostgreSQL):**
-Tables:
-
-users (id, email, password_hash, created_at)
-products (id, name, price, inventory, sku)
-orders (id, user_id, total, status, created_at)
-order_items (id, order_id, product_id, quantity, price)
-payments (id, order_id, amount, status, processor)
-
-**NoSQL Database (DynamoDB):**
-Tables:
-
-ProductCatalog (pk: product_id, sk: timestamp, attributes: product details)
-SessionStore (pk: session_id, ttl: expiration, attributes: cart data)
-UserPreferences (pk: user_id, sk: preference_type, attributes: settings)
-
-
-**Data Lake (S3):**
-- Raw events: s3://data-lake-raw/events/
-- Processed data: s3://data-lake-processed/analytics/
-- Backup: s3://backup-vault/daily-backup/
-
-#### 4.4 ETL & Analytics Pipeline
-
-**Data Flow:**
-1. **Ingestion**: Orders → SNS → Lambda → S3 (raw)
-2. **Transformation**: AWS Glue Crawler discovers schema → ETL job transforms → S3 (processed)
-3. **Analysis**: Athena queries processed data → QuickSight visualizations
-4. **Insights**: Dashboard shows:
-   - Total sales by region
-   - Product popularity
-   - Customer lifetime value
-   - Inventory levels
-
-#### 4.5 Security Implementation
-
-**IAM Architecture:**
-- Admin role: Full access
-- Developer role: Limited to development resources
-- Lambda execution role: Read/write to specific S3 buckets
-- RDS access: Through temporary credentials via Secrets Manager
-
-**Encryption:**
-- At Rest: S3 SSE-KMS, RDS encryption, DynamoDB encryption
-- In Transit: TLS 1.2+, HTTPS everywhere
-
-**Network Security:**
-- VPC with public and private subnets
-- Bastion host for RDS access
-- Security groups restrict traffic
-- NACLs for subnet-level control
-
-**API Security:**
-- API Gateway authentication with API keys
-- JWT tokens for user sessions
-- CORS policies for cross-origin requests
-- Rate limiting to prevent abuse
-
-#### 4.6 CI/CD Pipeline
-
-**Infrastructure as Code:**
-GitHub Repository 
-        ↓ 
-CodePipeline (Trigger on push)
-        ↓ 
-CodeBuild (Run tests, build artifacts)
-        ↓ 
-CodeDeploy (Deploy to Lambda, ECS)
-        ↓ 
-Production Environment
-
-
-**Deployment Stages:**
-1. **Dev**: Automatic deployment on branch push
-2. **Staging**: Manual approval required
-3. **Production**: Canary deployment (5% → 50% → 100%)
-
-### 5. Implementation Timeline
-
-#### Week 1-2: Foundation & Planning
-- Review AWS fundamentals
-- Design architecture and create diagrams
-- Set up AWS account and IAM roles
-- Initialize IaC templates
-
-#### Week 3-4: Core Infrastructure
-- Deploy VPC, RDS, DynamoDB
-- Set up S3 buckets with lifecycle policies
-- Configure IAM policies and KMS keys
-- Implement ElastiCache cluster
-
-#### Week 5-6: API & Application
-- Develop Lambda functions for REST API
-- Create API Gateway endpoints
-- Build and containerize microservices
-- Deploy on ECS/Fargate
-
-#### Week 7-8: Frontend & Security
-- Build Next.js frontend
-- Implement Cognito authentication
-- Set up CloudFront distribution
-- Deploy on AWS Amplify
-
-#### Week 9: Messaging & Analytics
-- Configure SNS/SQS messaging
-- Build data pipeline with Glue
-- Create Athena queries
-- Set up QuickSight dashboard
-
-#### Week 10: CI/CD & Automation
-- Create CodePipeline
-- Build CodeBuild projects
-- Implement CodeDeploy configurations
-- Automate with CloudFormation/Terraform
-
-#### Week 11: Monitoring & Optimization
-- Configure CloudWatch dashboards
-- Set up alarms and notifications
-- Implement X-Ray tracing
-- Performance tuning and cost optimization
-
-#### Week 12: Testing, Documentation & Presentation
-- End-to-end testing
-- Load testing with Artillery
-- Create runbooks and documentation
-- Prepare final presentation
-
-### 6. Technology Stack & Tools
-
-**Languages & Frameworks:**
-- JavaScript/TypeScript (Lambda, Next.js)
-- Python (Glue ETL scripts)
-- SQL (RDS, Athena)
-- HCL (Terraform)
-- YAML (CloudFormation)
-
-**Development Tools:**
-- AWS SAM CLI for local Lambda development
-- Docker for containerization
-- Git for version control
-- VS Code for development
-- Postman for API testing
-
-**AWS CLI & SDKs:**
-- AWS CLI for command-line operations
-- Boto3 (Python AWS SDK)
-- AWS SDK for JavaScript/Node.js
-
-### 7. Cost Estimation
-
-#### Monthly Cost Breakdown
-
-| Service | Usage | Cost/Month |
-|---------|-------|----------|
-| Lambda | 1M requests, 512MB, 1s avg | $20.00 |
-| API Gateway | 1M requests | $35.00 |
-| RDS (db.t3.micro, Multi-AZ) | 730 hours | $60.00 |
-| DynamoDB (on-demand) | 1M reads, 500K writes | $50.00 |
-| S3 Storage | 100 GB | $2.30 |
-| S3 Requests | 1M PUT, 2M GET | $5.00 |
-| CloudFront | 50 GB transfer | $4.25 |
-| ElastiCache (cache.t3.micro) | 730 hours | $18.00 |
-| VPC NAT Gateway | 45 GB processed | $32.40 |
-| CloudWatch Logs | 10 GB ingested | $5.00 |
-| Glue ETL Jobs | 2 DPUs, 8 hours/month | $2.88 |
-| Glue Crawlers | 1 crawler, 5 runs | $0.44 |
-| Amplify Hosting | 500 MB stored, 1 GB data transfer | $5.00 |
-| **Total** | | **$240.27** |
-
-**Cost Optimization Strategies:**
-- Use Reserved Instances for RDS (30% savings)
-- Enable S3 Intelligent-Tiering (automatic cost reduction)
-- Schedule non-production resources to shut down
-- Use VPC endpoints to avoid NAT Gateway charges
-- Target: ~$150/month with optimizations
-
-### 8. Risk Assessment & Mitigation
-
-#### Risk Matrix
-
-| Risk | Probability | Impact | Severity | Mitigation |
-|------|------------|--------|----------|------------|
-| API Rate Limit Exceeded | Medium | High | High | Implement rate limiting, auto-scaling |
-| Database Connection Pool Exhaustion | Low | High | High | Connection pooling, RDS proxy |
-| Data Loss | Low | Critical | Critical | Automated backups, cross-region replication |
-| Cost Overrun | Medium | Medium | Medium | AWS Budget Alerts, Reserved Instances |
-| Lambda Cold Start Issues | Low | Medium | Low | Provisioned concurrency, optimization |
-| Deployment Failures | Low | Medium | Low | Automated rollback, testing |
-
-#### Contingency Plans
-
-1. **Database Failure**: 
-   - Automatic failover with Multi-AZ RDS
-   - DynamoDB global tables for replication
-   - Regular snapshots and cross-region backups
-
-2. **API Performance Degradation**:
-   - Enable Lambda provisioned concurrency
-   - Implement ElastiCache for frequently accessed data
-   - Scale DynamoDB capacity on-demand
-
-3. **Security Breach**:
-   - Immediate CloudTrail analysis
-   - Rotate all credentials via Secrets Manager
-   - Deploy WAF rules on API Gateway
-   - Isolate affected resources
-
-### 9. Expected Learning Outcomes
-
-#### Technical Competencies Achieved
-
-1. **Cloud Architecture**
-   - Design multi-tier, highly available systems
-   - Understand serverless vs. container-based architectures
-   - Implement disaster recovery strategies
-
-2. **AWS Services Mastery**
-   - Hands-on experience with 20+ AWS services
-   - Integration patterns and best practices
-   - Cost optimization techniques
-
-3. **Security & Compliance**
-   - IAM policy design and least privilege
-   - Encryption implementation (KMS, TLS)
-   - Audit logging and compliance monitoring
-
-4. **DevOps & Automation**
-   - Infrastructure as Code with Terraform/CloudFormation
-   - CI/CD pipeline implementation
-   - Automated testing and deployment
-
-5. **Data Engineering**
-   - ETL pipeline design
-   - Data lake architecture
-   - Analytics and visualization
-
-6. **Monitoring & Observability**
-   - CloudWatch metrics and alarms
-   - Distributed tracing with X-Ray
-   - Log aggregation and analysis
-
-#### Practical Deliverables
-
-1. **GitHub Repository**: Fully documented IaC code
-2. **Architecture Diagrams**: Multiple views (logical, deployment, data flow)
-3. **Runbooks**: Operational procedures and troubleshooting guides
-4. **Cost Analysis**: Detailed cost breakdown and optimization report
-5. **Testing Report**: Load testing, security testing results
-6. **Documentation**: Comprehensive API docs, deployment guide, user manual
-
-### 10. Success Metrics
-
-**Technical Metrics:**
-- ✅ All 20+ AWS services deployed and operational
-- ✅ API response time < 200ms (p95)
-- ✅ System uptime > 99.9%
-- ✅ Automated deployment success rate > 95%
-
-**Security Metrics:**
-- ✅ Zero security vulnerabilities in code scan
-- ✅ All data encrypted at rest and in transit
-- ✅ Audit logging enabled on all resources
-- ✅ OWASP Top 10 compliance achieved
-
-**Cost Metrics:**
-- ✅ Operating cost < $200/month
-- ✅ Cost per transaction < $0.01
-- ✅ Identified cost optimization opportunities
-
-**Learning Metrics:**
-- ✅ Complete all 12 weeks of training
-- ✅ Pass AWS SAA (Solutions Architect Associate) practice exam
-- ✅ Create comprehensive documentation
-- ✅ Present working prototype to stakeholders
-
-### 11. Conclusion
-
-This e-commerce platform project represents a **comprehensive, real-world application** of AWS cloud services learned during the 12-week FCAJ internship. By building this project, I will:
-
-- Consolidate theoretical knowledge into practical skills
-- Demonstrate proficiency across multiple AWS service categories
-- Create a portfolio project showcasing cloud architecture capabilities
-- Establish a foundation for future AWS certifications (SAA, Developer, DevOps)
-
-The project is designed to be **scalable, secure, cost-effective, and production-ready**, serving as both a learning tool and a reference implementation for enterprise-grade cloud solutions.
+## AI Content Generator Platform - AI Marketing Content Creation Platform on AWS
+
+---
+
+### 1. Project Overview
+
+**AI Content Generator Platform** is a next-generation SaaS platform that empowers Small and Medium Businesses (SMBs) to automate their Marketing content creation process using Generative AI technology. The platform combines **AWS Cloud** and **Gemini API (Google AI)** to deliver a diverse, scalable, and highly secure content generation solution.
+
+| Criteria | Value |
+| --- | --- |
+| **Business Model** | SaaS – Monthly/Annual Subscription |
+| **Target Audience** | Small and Medium Businesses (SMBs), Marketing Agencies |
+| **AI Technology** | Gemini API (Google AI) via AWS Lambda |
+| **Infrastructure** | AWS ap-southeast-1 / ap-southeast-2 |
+| **Scalability** | Auto Scaling – from 10 to 10,000+ users |
+| **Availability** | Multi-AZ, RDS Failover – 99.9% uptime |
+
+---
+
+### 2. Objectives
+
+#### 2.1 Project Objectives
+
+| # | Objective | Metric |
+| --- | --- | --- |
+| 1 | Build a complete MVP within 4 weeks (Weeks 9–12) | Go-live by end of Week 12 |
+| 2 | Achieve high availability for the production system | Uptime ≥ 99.9% |
+| 3 | Automate the end-to-end AI content generation flow | Time < 60 seconds/content set |
+| 4 | Implement an architecture meeting AWS Well-Architected standards | All 6 pillars covered |
+| 5 | Comprehensive security following the Least Privilege principle | No wildcard `*` permissions |
+
+#### 2.2 Value Proposition
+
+*   **Time-saving:** Content creation process shortened from 3–5 days to **< 30 minutes**.
+*   **Cost-saving:** Reduce 60–80% compared to hiring Copywriters/Agencies (from $500–3,000/month to $50–150/month).
+*   **Brand Consistency:** Brand Persona ensures the correct tone of voice whether generating 10 or 1,000 articles.
+*   **Easy Scalability:** Scale to multiple products, markets, and languages without a linear increase in human resources.
+
+---
+
+### 3. Problem Statement
+
+#### 3.1 Market Context
+
+The Digital Marketing market in Southeast Asia has grown strongly post-COVID-19. SMBs face the pressure of continuous multi-channel content creation, while creative resources are limited and Copywriter/Agency costs are rising.
+
+#### 3.2 Core Problems
+
+**Problem 1 – High labor costs**
+An average SMB spends $500–$3,000/month on marketing content. High-quality creative human resources are scarce and expensive.
+
+**Problem 2 – Lack of brand consistency**
+When multiple people or agencies produce content, the brand's tone and image easily diverge, leading to a loss of end-customer trust.
+
+**Problem 3 – Slow content production speed**
+The traditional workflow from brief → draft → review → edit → publish takes an average of **3–7 working days**, failing to meet the pace of real-time marketing.
+
+**Problem 4 – Difficulty in scaling**
+When a business expands into new products or markets, content demand multiplies, but human resources cannot be scaled linearly.
+
+#### 3.3 Opportunity
+
+The popularity of LLMs and the ability to integrate via APIs open the opportunity to build a **content automation** platform capable of understanding brand context, customizing for target audiences, and exporting to multiple formats — all within a simple interface, requiring no technical skills.
+
+---
+
+### 4. Solution Architecture
+
+#### 4.1 Overview
+
+The system is deployed on AWS with a multi-tier architecture, clearly separating the Edge, API, Compute, Queue, AI Worker, and Data layers. All computing resources are located within a **VPC (10.0.0.0/16)** spanning **2 Availability Zones**.
+
+> ![Architecture](/static/images/Architecture.png)
+
+### 4.2 Architecture Components
+
+| Layer | Service | Role |
+| --- | --- | --- |
+| **Edge & Security** | Amazon CloudFront | Global CDN for React SPA, static content caching |
+| | AWS WAF | Protection against SQL Injection, XSS, Bots, Layer 7 DDoS |
+| **API** | Amazon API Gateway | Request reception, rate limiting, Cognito Authorizer authentication |
+| | Amazon Cognito | User authentication and authorization (User Pool) |
+| **Compute** | Application Load Balancer | Load distribution to EC2, automatic Health Checks, spanning 2 AZs |
+| | Amazon EC2 (Express API) | Business logic: auth, Brand Persona, Prompts, RDS queries (placed in Private Subnet, no Public IP, traffic only via ALB) |
+| | Auto Scaling Group | Automatically scale EC2 instances based on actual load |
+| **Queue & AI Worker** | Amazon SQS (Main Queue) | Receive AI tasks from EC2, asynchronous processing |
+| | AWS Lambda (Node.js) | Worker fetching jobs from SQS, calling Gemini API |
+| **AI** | Gemini API (Google AI) | LLM model for generating marketing content |
+| **Data** | Amazon RDS PostgreSQL (Multi-AZ) | Store users, Brand Personas, campaign history, job statuses |
+| | Amazon S3 | Store exported files (PDF, DOCX, HTML), logos, brand assets |
+| **Observability** | CloudWatch | System-wide Logs, Metrics, and Alarms |
+| | AWS X-Ray | Distributed tracing – end-to-end request tracking |
+| **Security** | AWS Secrets Manager | Secure storage of Gemini API Keys and sensitive info |
+| | AWS KMS | Data encryption at-rest (RDS, S3) |
+| | AWS IAM | Least Privilege access control for all services |
+
+#### 4.3 Main Execution Flow
+
+1. User → React SPA → CloudFront
+2. CloudFront → WAF (checks for SQL Injection, XSS, Bots)
+3. WAF → API Gateway (Cognito auth, rate limiting)
+4. API Gateway → ALB → EC2 (Auto Scaling Group)
+5. EC2: authenticates user, builds Prompt from Brief + Brand Persona, queries RDS → pushes job → SQS Main Queue
+6. Lambda Worker: fetches job from SQS, retrieves API Key from Secrets Manager → calls Gemini API
+7. Gemini API generates content
+8. Lambda: saves file → S3, updates status → RDS
+9. EC2 returns result to UI → User edits & exports file
+
+#### 4.4 AWS Well-Architected Framework
+
+| Pillar | Applied Solution |
+| --- | --- |
+| **Operational Excellence** | CloudWatch Alarms, X-Ray Tracing, Automated CI/CD |
+| **Security** | WAF, IAM Least Privilege, Secrets Manager, KMS, Private Subnets |
+| **Reliability** | ALB + Auto Scaling, RDS Multi-AZ Failover |
+| **Performance Efficiency** | CloudFront CDN, Serverless Lambda, RDS Query Optimization |
+| **Cost Optimization** | Lambda pay-per-use, S3 Lifecycle Policies, On-demand Auto Scaling |
+| **Sustainability** | Resource allocation based on actual demand, shutting down Dev environments off-hours |
+
+---
+
+### 5. Timeline
+
+| Week | Objective | Main Tasks | Milestone |
+| --- | --- | --- | --- |
+| **9** | Complete AWS Infrastructure | VPC + Subnets + IAM; RDS Multi-AZ + Secrets Manager; ALB + EC2 ASG; CloudFront + WAF + API Gateway + CI/CD | Successful ping test: CloudFront → API GW → ALB → EC2 → RDS |
+| **10** | Business Backend + Basic UI | Auth API (JWT + Cognito); CRUD Brand Persona; Prompt engine from Brief + Persona; React Dashboard (UI v1.0) | Login, create Persona, input Brief, receive automated Prompt |
+| **11** | End-to-end AI Worker Flow | SQS pipeline; Lambda → Gemini API → S3 + RDS; Export PDF/DOCX/HTML; Load Testing & optimization | Brief → AI generates content → Export PDF in < 60 seconds |
+| **12** | Hardening & Production | Security audit (WAF, IAM, pentest); UAT + collect feedback; Bug fixes + finalize docs/runbooks; Go-Live + onboard | Production live, 24/7 monitoring, first customers onboarded |
+
+---
+
+### 6. Budget
+
+#### 6.1 Build Costs
+
+| Service | Configuration | Est. Cost/Month |
+| --- | --- | --- |
+| Amazon EC2 | t3.medium × 2 (On-Demand, Auto Scaling min=2, 1/AZ) | ~$60 |
+| Amazon RDS PostgreSQL | db.t3.micro, Multi-AZ | ~$50 |
+| NAT Gateway | 2 AZs | ~$64 |
+| CloudFront | 100 GB transfer | ~$8 |
+| API Gateway | 1M requests | ~$3.50 |
+| CloudWatch | Basic Logs + Metrics | ~$5 |
+| AWS Lambda | ~100,000 invocations, 512MB | ~$1 |
+| Amazon SQS | ~500,000 requests | ~$0.20 |
+| Amazon S3 | 50 GB | ~$2 |
+| AWS Secrets Manager | 1 secret (Gemini API Key) | ~$1 |
+| AWS KMS | 1 CMK (encrypting RDS + S3) | ~$1 |
+| Amazon Cognito | < 50,000 MAU (Free Tier) | $0 |
+| **Total AWS/month** | | **~$196** |
+
+> 💡 **Note:** ElastiCache Redis will be added in Phase 2 when concurrent users exceed 200+, to reduce RDS load and optimize response time.
+
+#### Gemini API (Google AI)
+
+| Phase | Request Volume | Estimated Cost |
+| --- | --- | --- |
+| Dev/Staging | ~1,000/month | ~$1–5/month |
+
+#### 6.2 Cost Optimization Strategy
+
+*   **Reserved Instances:** Reserve EC2 and RDS for 1 year → save 30–40%
+*   **Serverless Lambda:** AI Worker only incurs charges when there's a job, no idle costs
+*   **CloudFront caching:** Reduces requests to EC2 and bandwidth load
+*   **S3 Lifecycle Policy:** Automatically transition files > 90 days to S3 Glacier
+*   **Auto Scaling:** Scale down to minimum instances during off-peak hours
+*   **Spot Instances for Dev:** Save 60–70% compared to On-Demand
+
+---
+
+### 7. Risks
+
+#### 7.1 Risk Matrix
+
+| Risk | Likelihood | Impact |
+| --- | --- | --- |
+| Gemini API downtime/throttling | Medium | High |
+| Gemini API costs exceed budget | High | Medium |
+| User data security vulnerability | Low | Very High |
+| EC2 instance failure (if not Multi-AZ) | Low | High |
+| Slow RDS failover | Low | Medium |
+| Lambda timeout due to slow Gemini response | Medium | Medium |
+| AWS costs exceed estimates | Medium | Low |
+| Delay in Phase 3 (AI Integration) | Medium | Low |
+
+#### 7.2 Mitigation Strategies
+
+**Gemini API Downtime/Throttling:**
+
+*   Lambda retries with Exponential Backoff (3 times, max 5 minutes).
+*   CloudWatch Alarms trigger when job failure rates spike.
+*   Fallback: Integrate OpenAI API or Amazon Bedrock (Phase 2+).
+
+**Gemini API Costs Exceeding Budget:**
+
+*   Limit AI API calls by subscription plan (Free: 10/mo, Basic: 100, Pro: unlimited).
+*   Implement Rate limiting at API Gateway (requests/minute per user).
+*   Set up Google Cloud Budget Alerts + AWS Cost Anomaly Detection.
+
+**Data Security Vulnerabilities:**
+
+*   EC2, Lambda, and RDS reside in Private Subnets (no Public IP).
+*   KMS encrypts data at-rest (RDS + S3); all connections use TLS 1.2+.
+*   Secrets Manager fully replaces environment variables for credentials.
+*   WAF blocks SQL Injection, XSS, bad bots; CloudTrail provides audit logs for all API calls.
+*   Conduct quarterly IAM permissions reviews (every 90 days).
+
+**Lambda Timeout when Gemini Responds Slowly:**
+
+*   Lambda timeout set to 270 seconds (leaving a buffer against the 300s max limit).
+*   Each job generates only 1 type of content (avoid batching multiple types into 1 Lambda call).
+*   Utilize streaming responses from Gemini API where applicable.
+*   On timeout → auto-retry the job with a higher priority queue.
+
+**Delay in Phase 3 (AI Integration):**
+
+*   Allocate a 1-week buffer (Week 12) strictly for Performance Testing and bug fixing.
+*   Prototype Lambda + Gemini API independently starting from Week 2, parallel to Phase 1.
+*   Utilize the free Gemini API Sandbox during the initial development phase.
+
+---
+
+> References:
+>
+> [AWS Well-Architected](https://aws.amazon.com/architecture/well-architected/)
+>
+> [Gemini API Docs](https://ai.google.dev/docs)
+>
+> [Amazon SQS Best Practices](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/best-practices.html)

@@ -1,411 +1,238 @@
 ---
-title: "Bản đề xuất"
-date: 2026-04-17
+title: "Proposal"
+date: 2026-05-14
 weight: 2
 chapter: false
 pre: " <b> 2. </b> "
 ---
 
-# Nền Tảng Thương Mại Điện Tử Đa Tầng Với AWS
-## Kiến Trúc Serverless Sẵn Sàng Cho Sản Xuất Với Khả Năng Mở Rộng Cao
-
-### 1. Tóm Tắt Điều Hành
-
-Đề xuất này trình bày thiết kế và triển khai một **nền tảng thương mại điện tử hoàn chỉnh, sẵn sàng cho sản xuất** sử dụng các dịch vụ đám mây AWS. Nền tảng này thể hiện cách áp dụng các best practices của AWS trên các khía cạnh tính toán, lưu trữ, mạng, bảo mật, phân tích dữ liệu và tự động hóa hạ tầng.
-
-Giải pháp được xây dựng hoàn toàn trên kiến trúc serverless để tự động mở rộng, đạt khả năng sẵn sàng cao và tối ưu chi phí. Đây cũng là một dự án học tập toàn diện nhằm tổng hợp kiến thức tích lũy trong suốt 12 tuần của chương trình đào tạo AWS chuyên sâu.
-
-**Mục tiêu chính:**
-- Thiết kế và triển khai một hệ thống thương mại điện tử đa tầng, khả dụng cao
-- Áp dụng best practices bảo mật với IAM, KMS và mã hóa
-- Tạo pipeline CI/CD tự động cho triển khai liên tục
-- Thiết lập giám sát toàn diện và khả năng quan sát hệ thống
-- Tối ưu chi phí và hiệu suất
-
-### 2. Vấn Đề Và Tổng Quan Giải Pháp
-
-#### Thách Thức
-Các nền tảng thương mại điện tử truyền thống thường gặp phải:
-- **Vấn đề mở rộng**: Không thể xử lý lượng truy cập tăng đột biến trong mùa cao điểm mua sắm
-- **Chi phí vận hành cao**: Cần đội DevOps chuyên trách để quản lý hạ tầng
-- **Hiệu quả chi phí kém**: Cơ sở hạ tầng cố định dù không sử dụng thường xuyên
-- **Phạm vi địa lý hạn chế**: Triển khai ở một khu vực gây độ trễ cao cho người dùng quốc tế
-- **Quy trình triển khai thủ công**: Cập nhật chậm và dễ phát sinh lỗi
-
-#### Giải Pháp Của Chúng Tôi
-Nền tảng **Thương Mại Điện Tử Serverless AWS** giải quyết các thách thức này bằng cách:
-- **Tính toán tự động mở rộng**: Lambda xử lý hàng triệu yêu cầu
-- **Phân phối toàn cầu**: CloudFront CDN và triển khai đa khu vực
-- **Cơ sở hạ tầng dạng mã**: Terraform và CloudFormation để tái lập, kiểm soát phiên bản
-- **Tự động hóa hoàn toàn**: CI/CD loại bỏ triển khai thủ công
-- **Bảo mật cấp doanh nghiệp**: IAM, mã hóa khi lưu trữ và truyền tải, cô lập mạng
-- **Phân tích dữ liệu thời gian thực**: Pipeline dữ liệu từ giao dịch đến bảng điều khiển phân tích
-
-### 3. Kiến Trúc Giải Pháp
-
-#### Các Thành Phần Kiến Trúc Cấp Cao
-
-#### Các Dịch Vụ AWS Chính Được Triển Khai
-
-**Tính Toán & Containerization:**
-- AWS Lambda: REST API backend, event processors
-- Amazon ECS/Fargate: Microservices được container hóa
-- AWS API Gateway: Quản lý API và định tuyến
-
-**Lưu Trữ & Cơ Sở Dữ Liệu:**
-- Amazon S3: Tài sản web, hình ảnh sản phẩm, dữ liệu thô
-- Amazon RDS: Dữ liệu quan hệ (PostgreSQL)
-- Amazon DynamoDB: Danh mục sản phẩm, phiên người dùng
-- Amazon ElastiCache: Redis để lưu vào bộ nhớ đệm
-
-**Mạng & Phân Phối Nội Dung:**
-- Amazon VPC: Cô lập mạng
-- AWS CloudFront: Phân phối nội dung toàn cầu
-- Application Load Balancer: Cân bằng tải cho container
-- Route 53: DNS và định tuyến
-
-**Bảo Mật & Tuân Thủ:**
-- AWS IAM: Quản lý danh tính và truy cập
-- AWS KMS: Quản lý khóa
-- AWS Secrets Manager: Lưu trữ thông tin xác thực
-- VPC Security Groups: Tường lửa mạng
-
-**Nhắn Tin & Tích Hợp:**
-- Amazon SNS: Thông báo đến hàng
-- Amazon SQS: Xử lý tác vụ không đồng bộ
-- AWS EventBridge: Quy trình làm việc được điều khiển bởi sự kiện
-
-**Dữ Liệu & Phân Tích:**
-- Amazon Athena: Truy vấn SQL trên hồ dữ liệu
-- AWS Glue: Pipeline dữ liệu ETL
-- Amazon Kinesis: Truyền phát dữ liệu thời gian thực
-- QuickSight: Bảng điều khiển trí tuệ kinh doanh
-
-**Vận Hành & Giám Sát:**
-- Amazon CloudWatch: Metrics, logs, alarms
-- AWS X-Ray: Tracing phân tán
-- AWS CloudTrail: Ghi dấu audit API
-- CloudFormation/Terraform: Infrastructure as Code
-
-### 4. Chi Tiết Triển Khai Kỹ Thuật
-
-#### 4.1 Tầng Frontend & Web
-**Ngăn Xếp Công Nghệ:**
-- Next.js cho server-side rendering
-- React cho giao diện tương tác
-- TailwindCSS cho kiểu dáng
-- Được lưu trữ trên AWS Amplify
-
-**Tính Năng:**
-- Server-side rendering để tối ưu hóa SEO
-- Khả năng Progressive Web App (PWA)
-- Tính sẵn sàng sản phẩm thời gian thực
-- Thanh toán một cú nhấp chuột với xác thực Cognito
-
-#### 4.2 Tầng API & Ứng Dụng
-**REST API:**
-- Kiến trúc API Gateway + Lambda
-- Endpoints:
-  - GET /products (danh sách sản phẩm)
-  - GET /products/{id} (chi tiết sản phẩm)
-  - POST /orders (tạo đơn hàng)
-  - GET /orders/{id} (theo dõi đơn hàng)
-  - POST /users/auth (xác thực)
-
-**GraphQL API (Thay Thế):**
-- AWS AppSync cho GraphQL
-- Đồng bộ thời gian thực cho trạng thái đơn hàng
-- Tối ưu hóa truy vấn tự động
-
-**Microservices:**
-- Product Service (ECS/Fargate)
-- Order Service (ECS/Fargate)
-- Payment Service (Lambda + tích hợp bên thứ ba)
-- Notification Service (SQS consumer)
-
-#### 4.3 Kiến Trúc Tầng Dữ Liệu
-
-**Cơ Sở Dữ Liệu Quan Hệ (RDS PostgreSQL):**
-Các bảng:
-
-users (id, email, password_hash, created_at)
-products (id, name, price, inventory, sku)
-orders (id, user_id, total, status, created_at)
-order_items (id, order_id, product_id, quantity, price)
-payments (id, order_id, amount, status, processor)
-
-**Cơ Sở Dữ Liệu NoSQL (DynamoDB):**
-Các bảng:
-
-ProductCatalog (pk: product_id, sk: timestamp, attributes: chi tiết sản phẩm)
-SessionStore (pk: session_id, ttl: expiration, attributes: dữ liệu giỏ hàng)
-UserPreferences (pk: user_id, sk: preference_type, attributes: cài đặt)
-
-**Hồ Dữ Liệu (S3):**
-- Raw events: s3://data-lake-raw/events/
-- Processed data: s3://data-lake-processed/analytics/
-- Backup: s3://backup-vault/daily-backup/
-
-#### 4.4 Pipeline ETL & Phân Tích
-
-**Luồng Dữ Liệu:**
-1. **Tiếp nhận**: Orders -> SNS -> Lambda -> S3 (raw)
-2. **Chuyển đổi**: AWS Glue Crawler phát hiện schema -> Công việc ETL chuyển đổi -> S3 (processed)
-3. **Phân tích**: Athena truy vấn dữ liệu đã xử lý -> Hiển thị qua QuickSight
-4. **Insights**: Bảng điều khiển hiển thị:
-   - Tổng doanh số theo khu vực
-   - Sản phẩm nổi tiếng
-   - Giá trị suốt đời của khách hàng
-   - Mức tồn kho
-
-#### 4.5 Triển Khai Bảo Mật
-
-**Kiến Trúc IAM:**
-- Role admin: Truy cập đầy đủ
-- Role developer: Truy cập hạn chế đến tài nguyên phát triển
-- Role execution Lambda: Đọc/ghi vào S3 bucket cụ thể
-- Truy cập RDS: Thông qua thông tin xác thực tạm thời qua Secrets Manager
-
-**Mã Hóa:**
-- Tại rest: S3 SSE-KMS, RDS encryption, DynamoDB encryption
-- Truyền tải: TLS 1.2+, HTTPS everywhere
-
-**Bảo Mật Mạng:**
-- VPC với public và private subnets
-- Bastion host để truy cập RDS
-- Security groups hạn chế lưu lượng truy cập
-- NACLs cho kiểm soát ở cấp subnet
-
-**Bảo Mật API:**
-- Xác thực API Gateway với API keys
-- JWT tokens cho phiên người dùng
-- CORS policies cho yêu cầu cross-origin
-- Rate limiting để ngăn chặn lạm dụng
-
-#### 4.6 Pipeline CI/CD
-
-**Infrastructure as Code:**
-    GitHub Repository
-        ->
-    CodePipeline (Trigger on push)
-        ->
-    CodeBuild (Run tests, build artifacts)
-        ->
-    CodeDeploy (Deploy to Lambda, ECS)
-        ->
-    Production Environment
-
-**Các Giai Đoạn Triển Khai:**
-1. **Dev**: Triển khai tự động khi push branch
-2. **Staging**: Yêu cầu phê duyệt thủ công
-3. **Production**: Canary deployment (5% -> 50% -> 100%)
-
-### 5. Lộ Trình Triển Khai
-
-#### Tuần 1-2: Nền Tảng & Lập Kế Hoạch
-- Ôn tập các nguyên tắc cơ bản AWS
-- Thiết kế kiến trúc và tạo sơ đồ
-- Thiết lập tài khoản AWS và vai trò IAM
-- Khởi tạo các mẫu IaC
-
-#### Tuần 3-4: Cơ Sở Hạ Tầng Cốt Lõi
-- Triển khai VPC, RDS, DynamoDB
-- Thiết lập S3 buckets với chính sách vòng đời
-- Cấu hình IAM policies và KMS keys
-- Triển khai ElastiCache cluster
-
-#### Tuần 5-6: API & Ứng Dụng
-- Phát triển Lambda functions cho REST API
-- Tạo API Gateway endpoints
-- Xây dựng và container hóa microservices
-- Triển khai trên ECS/Fargate
-
-#### Tuần 7-8: Frontend & Bảo Mật
-- Xây dựng frontend Next.js
-- Triển khai xác thực Cognito
-- Thiết lập CloudFront distribution
-- Triển khai trên AWS Amplify
-
-#### Tuần 9: Nhắn Tin & Phân Tích
-- Cấu hình SNS/SQS messaging
-- Xây dựng pipeline dữ liệu với Glue
-- Tạo truy vấn Athena
-- Thiết lập QuickSight dashboard
-
-#### Tuần 10: CI/CD & Tự Động Hóa
-- Tạo CodePipeline
-- Xây dựng CodeBuild projects
-- Triển khai CodeDeploy configurations
-- Tự động hóa với CloudFormation/Terraform
-
-#### Tuần 11: Giám Sát & Tối Ưu Hóa
-- Cấu hình CloudWatch dashboards
-- Thiết lập alarms và notifications
-- Triển khai X-Ray tracing
-- Điều chỉnh hiệu suất và tối ưu hóa chi phí
-
-#### Tuần 12: Kiểm Thử, Tài Liệu & Trình Bày
-- Kiểm thử end-to-end
-- Kiểm thử tải với Artillery
-- Tạo runbooks và tài liệu
-- Chuẩn bị trình bày cuối cùng
-
-### 6. Ngăn Xếp Công Nghệ & Công Cụ
-
-**Ngôn Ngữ & Frameworks:**
-- JavaScript/TypeScript (Lambda, Next.js)
-- Python (Glue ETL scripts)
-- SQL (RDS, Athena)
-- HCL (Terraform)
-- YAML (CloudFormation)
-
-**Công Cụ Phát Triển:**
-- AWS SAM CLI cho phát triển Lambda cục bộ
-- Docker cho container hóa
-- Git cho kiểm soát phiên bản
-- VS Code cho phát triển
-- Postman cho kiểm thử API
-
-**AWS CLI & SDK:**
-- AWS CLI cho hoạt động dòng lệnh
-- Boto3 (Python AWS SDK)
-- AWS SDK cho JavaScript/Node.js
-
-### 7. Ước Tính Chi Phí
-
-#### Phân Tích Chi Phí Hàng Tháng
-
-| Dịch Vụ | Sử Dụng | Chi Phí/Tháng |
-|---------|--------|---------------|
-| Lambda | 1M requests, 512MB, 1s avg | $20.00 |
-| API Gateway | 1M requests | $35.00 |
-| RDS (db.t3.micro, Multi-AZ) | 730 hours | $60.00 |
-| DynamoDB (on-demand) | 1M reads, 500K writes | $50.00 |
-| S3 Storage | 100 GB | $2.30 |
-| S3 Requests | 1M PUT, 2M GET | $5.00 |
-| CloudFront | 50 GB transfer | $4.25 |
-| ElastiCache (cache.t3.micro) | 730 hours | $18.00 |
-| VPC NAT Gateway | 45 GB processed | $32.40 |
-| CloudWatch Logs | 10 GB ingested | $5.00 |
-| Glue ETL Jobs | 2 DPUs, 8 hours/month | $2.88 |
-| Glue Crawlers | 1 crawler, 5 runs | $0.44 |
-| Amplify Hosting | 500 MB stored, 1 GB data transfer | $5.00 |
-| **Tổng Cộng** | | **$240.27** |
-
-**Chiến Lược Tối Ưu Hóa Chi Phí:**
-- Sử dụng Reserved Instances cho RDS (tiết kiệm 30%)
-- Bật S3 Intelligent-Tiering (tự động giảm chi phí)
-- Lên lịch tắt tài nguyên không phải sản xuất
-- Sử dụng VPC endpoints để tránh phí NAT Gateway
-- Mục tiêu: khoảng $150/tháng sau tối ưu
-
-### 8. Đánh Giá Rủi Ro & Biện Pháp Giảm Thiểu
-
-#### Ma Trận Rủi Ro
-
-| Rủi Ro | Xác Suất | Tác Động | Mức Độ | Biện Pháp Giảm Thiểu |
-|--------|----------|----------|--------|---------------------|
-| Vượt giới hạn tỉ lệ API | Trung bình | Cao | Cao | Triển khai rate limiting, tự động mở rộng |
-| Cạn kiệt kết nối DB | Thấp | Cao | Cao | Connection pooling, RDS proxy |
-| Mất dữ liệu | Thấp | Tối Hạn | Tối Hạn | Backup tự động, sao chép đa khu vực |
-| Vượt quá ngân sách | Trung bình | Trung bình | Trung bình | AWS Budget Alerts, Reserved Instances |
-| Vấn đề cold start Lambda | Thấp | Trung bình | Thấp | Provisioned concurrency, optimization |
-| Lỗi triển khai | Thấp | Trung bình | Thấp | Rollback tự động, kiểm thử |
-
-#### Kế Hoạch Dự Phòng
-
-1. **Lỗi Cơ Sở Dữ Liệu**:
-   - Failover tự động với Multi-AZ RDS
-   - DynamoDB global tables cho sao chép
-   - Snapshot thường xuyên và backup đa khu vực
-
-2. **Suy Giảm Hiệu Suất API**:
-   - Bật Lambda provisioned concurrency
-   - Triển khai ElastiCache cho dữ liệu truy cập thường xuyên
-   - Mở rộng DynamoDB capacity on-demand
-
-3. **Vi Phạm Bảo Mật**:
-   - Phân tích CloudTrail ngay lập tức
-   - Xoay tất cả thông tin xác thực qua Secrets Manager
-   - Triển khai WAF rules trên API Gateway
-   - Cô lập tài nguyên bị ảnh hưởng
-
-### 9. Kết Quả Học Tập Dự Kiến
-
-#### Năng Lực Kỹ Thuật Đạt Được
-
-1. **Kiến Trúc Đám Mây**
-   - Thiết kế hệ thống đa tầng, khả dụng cao
-   - Hiểu kiến trúc serverless vs. container-based
-   - Triển khai chiến lược khôi phục thảm họa
-
-2. **Thạo Dịch Vụ AWS**
-   - Trải nghiệm thực hành với 20+ dịch vụ AWS
-   - Các mẫu tích hợp và best practices
-   - Các kỹ thuật tối ưu hóa chi phí
-
-3. **Bảo Mật & Tuân Thủ**
-   - Thiết kế chính sách IAM và nguyên tắc least privilege
-   - Triển khai mã hóa (KMS, TLS)
-   - Ghi dấu audit và giám sát tuân thủ
-
-4. **DevOps & Tự Động Hóa**
-   - Infrastructure as Code với Terraform/CloudFormation
-   - Triển khai pipeline CI/CD
-   - Kiểm thử và triển khai tự động
-
-5. **Kỹ Thuật Dữ Liệu**
-   - Thiết kế pipeline ETL
-   - Kiến trúc hồ dữ liệu
-   - Phân tích và hình ảnh hóa
-
-6. **Giám Sát & Khả Năng Quan Sát**
-   - CloudWatch metrics và alarms
-   - Distributed tracing với X-Ray
-   - Tập hợp và phân tích log
-
-#### Deliverables Thực Tế
-
-1. **GitHub Repository**: Mã IaC được lặp, tài liệu đầy đủ
-2. **Sơ Đồ Kiến Trúc**: Nhiều góc nhìn (logic, deployment, data flow)
-3. **Runbooks**: Quy trình vận hành và hướng dẫn khắc phục sự cố
-4. **Phân Tích Chi Phí**: Phân tích chi phí chi tiết và báo cáo tối ưu hóa
-5. **Báo Cáo Kiểm Thử**: Kết quả kiểm thử tải, kiểm thử bảo mật
-6. **Tài Liệu**: Tài liệu API toàn diện, hướng dẫn triển khai, hướng dẫn người dùng
-
-### 10. Chỉ Số Thành Công
-
-**Chỉ Số Kỹ Thuật:**
-- Tất cả 20+ dịch vụ AWS được triển khai và hoạt động
-- Thời gian phản hồi API < 200ms (p95)
-- Uptime hệ thống > 99.9%
-- Tỷ lệ thành công triển khai tự động > 95%
-
-**Chỉ Số Bảo Mật:**
-- Không có lỗ hổng bảo mật trong code scan
-- Tất cả dữ liệu được mã hóa khi lưu trữ và truyền tải
-- Ghi dấu audit được bật trên tất cả tài nguyên
-- Tuân thủ OWASP Top 10 đạt được
-
-**Chỉ Số Chi Phí:**
-- Chi phí vận hành < $200/tháng
-- Chi phí trên mỗi giao dịch < $0.01
-- Xác định các cơ hội tối ưu hóa chi phí
-
-**Chỉ Số Học Tập:**
-- Hoàn thành toàn bộ 12 tuần đào tạo
-- Vượt qua bài thi thực hành AWS SAA (Solutions Architect Associate)
-- Tạo tài liệu toàn diện
-- Trình bày prototype hoạt động cho các bên liên quan
-
-### 11. Kết Luận
-
-Dự án nền tảng thương mại điện tử này đại diện cho **ứng dụng thực tế toàn diện** các dịch vụ đám mây AWS đã học trong suốt kỳ thực tập 12 tuần FCAJ. Bằng cách xây dựng dự án này, tôi sẽ:
-
-- Tổng hợp kiến thức lý thuyết thành kỹ năng thực tế
-- Thể hiện sự thành thạo trên nhiều danh mục dịch vụ AWS
-- Tạo dự án danh mục giới thiệu khả năng kiến trúc đám mây
-- Thiết lập nền tảng cho các chứng chỉ AWS trong tương lai (SAA, Developer, DevOps)
-
-Dự án được thiết kế để có **khả năng mở rộng, an toàn, hiệu quả chi phí và sẵn sàng cho sản xuất**, phục vụ như một công cụ học tập và triển khai tham chiếu cho các giải pháp đám mây cấp doanh nghiệp.
+## AI Content Generator Platform - Nền tảng Sáng tạo Nội dung Marketing AI trên AWS
 
+---
+
+### 1. Tổng quan dự án
+
+**AI Content Generator Platform** là nền tảng SaaS thế hệ mới, hỗ trợ các doanh nghiệp vừa và nhỏ (SMB) tự động hóa quy trình sáng tạo nội dung Marketing bằng công nghệ Generative AI. Nền tảng kết hợp **AWS Cloud** và **Gemini API (Google AI)** để cung cấp giải pháp tạo nội dung đa dạng, có thể mở rộng và bảo mật cao.
+
+| Tiêu chí | Giá trị |
+| --- | --- |
+| **Mô hình kinh doanh** | SaaS – Subscription theo tháng/năm |
+| **Đối tượng khách hàng** | Doanh nghiệp vừa và nhỏ, Agency Marketing |
+| **Công nghệ AI** | Gemini API (Google AI) qua AWS Lambda |
+| **Hạ tầng** | AWS ap-southeast-1 / ap-southeast-2 |
+| **Khả năng mở rộng** | Auto Scaling – từ 10 đến 10,000+ người dùng |
+| **Tính sẵn sàng** | Multi-AZ, RDS Failover – 99.9% uptime |
+
+---
+
+### 2. Mục tiêu
+
+#### 2.1 Mục tiêu dự án
+
+| # | Mục tiêu | Chỉ số đo lường |
+| --- | --- | --- |
+| 1 | Xây dựng MVP hoàn chỉnh trong 4 tuần (Tuần 9–12) | Go-live cuối Tuần 12 |
+| 2 | Đạt tính sẵn sàng cao cho hệ thống production | Uptime ≥ 99.9% |
+| 3 | Tự động hóa luồng sinh nội dung AI end-to-end | Thời gian < 60 giây/bộ nội dung |
+| 4 | Triển khai kiến trúc đạt chuẩn AWS Well-Architected | Đủ 6 trụ cột |
+| 5 | Bảo mật toàn diện theo nguyên tắc Least Privilege | Không có quyền wildcard `*` |
+
+#### 2.2 Giá trị mang lại
+
+*   **Tiết kiệm thời gian:** Quy trình tạo nội dung rút ngắn từ 3–5 ngày xuống còn **< 30 phút**.
+*   **Tiết kiệm chi phí:** Giảm 60–80% so với thuê Copywriter/Agency (từ $500–3,000/tháng xuống $50–150/tháng).
+*   **Nhất quán thương hiệu:** Brand Persona đảm bảo đúng tone of voice dù tạo 10 hay 1,000 bài viết.
+*   **Mở rộng dễ dàng:** Scale sang nhiều sản phẩm, thị trường, ngôn ngữ mà không tăng nhân lực tuyến tính.
+
+---
+
+### 3. Vấn đề cần giải quyết
+
+#### 3.1 Bối cảnh thị trường
+
+Thị trường Marketing Digital tại Đông Nam Á tăng trưởng mạnh sau đại dịch COVID-19. Các doanh nghiệp SMB phải đối mặt với áp lực tạo nội dung đa kênh liên tục, trong khi nguồn lực sáng tạo có hạn và chi phí Copywriter/Agency ngày càng tăng cao.
+
+#### 3.2 Các vấn đề cốt lõi
+
+**Vấn đề 1 – Chi phí nhân lực cao**
+Một SMB trung bình cần chi $500–$3,000/tháng cho nội dung marketing. Nguồn nhân lực sáng tạo chất lượng cao khan hiếm và tốn kém.
+
+**Vấn đề 2 – Thiếu nhất quán thương hiệu**
+Khi nhiều người hoặc agency cùng sản xuất nội dung, giọng văn và hình ảnh thương hiệu dễ bị phân kỳ, gây mất tin tưởng từ khách hàng cuối.
+
+**Vấn đề 3 – Tốc độ sản xuất nội dung chậm**
+Quy trình truyền thống từ brief → viết → duyệt → chỉnh sửa → đăng mất trung bình **3–7 ngày làm việc**, không đáp ứng được nhịp độ real-time marketing.
+
+**Vấn đề 4 – Khó mở rộng quy mô**
+Khi doanh nghiệp mở rộng sang nhiều sản phẩm hoặc thị trường mới, nhu cầu nội dung tăng gấp bội nhưng không thể tăng nhân lực theo tỷ lệ tuyến tính.
+
+#### 3.3 Cơ hội
+
+Sự phổ biến của LLM và khả năng tích hợp qua API mở ra cơ hội xây dựng nền tảng **tự động hóa nội dung** có khả năng hiểu ngữ cảnh thương hiệu, tùy biến theo đối tượng khách hàng, và xuất ra nhiều định dạng — tất cả trong một giao diện đơn giản, không cần kỹ năng kỹ thuật.
+
+---
+
+### 4. Kiến trúc giải pháp
+
+#### 4.1 Tổng quan
+
+Hệ thống triển khai trên AWS với kiến trúc nhiều lớp (multi-tier), phân tách rõ ràng giữa các tầng Edge, API, Compute, Queue, AI Worker và Data. Toàn bộ tài nguyên tính toán nằm trong **VPC (10.0.0.0/16)** trải rộng **2 Availability Zones**.
+
+> ![Architecture](/static/images/Architecture.png)
+
+### 4.2 Các thành phần kiến trúc
+
+| Tầng | Dịch vụ | Vai trò |
+| --- | --- | --- |
+| **Edge & Bảo mật** | Amazon CloudFront | CDN phân phối React SPA toàn cầu, cache nội dung tĩnh |
+| | AWS WAF | Bảo vệ trước SQL Injection, XSS, Bot, DDoS layer 7 |
+| **API** | Amazon API Gateway | Tiếp nhận request, rate limit, xác thực qua Cognito Authorizer |
+| | Amazon Cognito | Xác thực và phân quyền người dùng (User Pool) |
+| **Compute** | Application Load Balancer | Phân phối tải tới EC2, Health Check tự động, span 2 AZ |
+| | Amazon EC2 (Express API) | Xử lý nghiệp vụ: xác thực, Brand Persona, Prompt, truy vấn RDS (đặt trong Private Subnet, không có Public IP, chỉ nhận traffic qua ALB) |
+| | Auto Scaling Group | Tự động tăng/giảm số EC2 theo tải thực tế |
+| **Queue & AI Worker** | Amazon SQS (Main Queue) | Nhận tác vụ AI từ EC2, xử lý bất đồng bộ |
+| | AWS Lambda (Node.js) | Worker lấy job từ SQS, gọi Gemini API |
+| **AI** | Gemini API (Google AI) | Mô hình LLM sinh nội dung marketing |
+| **Data** | Amazon RDS PostgreSQL (Multi-AZ) | Lưu user, Brand Persona, lịch sử chiến dịch, trạng thái job |
+| | Amazon S3 | Lưu file xuất (PDF, DOCX, HTML), logo, assets thương hiệu |
+| **Observability** | CloudWatch | Logs, Metrics, Alarms toàn hệ thống |
+| | AWS X-Ray | Distributed tracing – theo dõi request end-to-end |
+| **Bảo mật** | AWS Secrets Manager | Lưu API Key Gemini và thông tin nhạy cảm |
+| | AWS KMS | Mã hóa data at-rest (RDS, S3) |
+| | AWS IAM | Phân quyền Least Privilege cho mọi dịch vụ |
+
+#### 4.3 Luồng xử lý chính
+
+1. User → React SPA → CloudFront
+2. CloudFront → WAF (kiểm tra SQL Injection, XSS, Bot)
+3. WAF → API Gateway (xác thực Cognito, rate limit)
+4. API Gateway → ALB → EC2 (Auto Scaling Group)
+5. EC2: xác thực user, xây dựng Prompt từ Brief + Brand Persona, truy vấn RDS → đẩy job → SQS Main Queue
+6. Lambda Worker: lấy job từ SQS, lấy API Key từ Secrets Manager → gọi Gemini API
+7. Gemini API sinh nội dung
+8. Lambda: lưu file → S3, cập nhật trạng thái → RDS
+9. EC2 trả kết quả về UI → User chỉnh sửa & xuất file
+
+#### 4.4 AWS Well-Architected Framework
+
+| Trụ cột | Giải pháp áp dụng |
+| --- | --- |
+| **Operational Excellence** | CloudWatch Alarms, X-Ray Tracing, CI/CD tự động |
+| **Security** | WAF, IAM Least Privilege, Secrets Manager, KMS, Private Subnet |
+| **Reliability** | ALB + Auto Scaling, RDS Multi-AZ Failover |
+| **Performance Efficiency** | CloudFront CDN, Lambda Serverless, RDS Query Optimization |
+| **Cost Optimization** | Lambda pay-per-use, S3 Lifecycle Policy, Auto Scaling theo nhu cầu |
+| **Sustainability** | Chỉ cấp phát tài nguyên theo nhu cầu thực, tắt môi trường Dev ngoài giờ |
+
+---
+
+### 5. Timeline
+
+| Tuần | Mục tiêu | Công việc chính | Milestone |
+| --- | --- | --- | --- |
+| **9** | Hạ tầng AWS hoàn chỉnh | VPC + Subnet + IAM; RDS Multi-AZ + Secrets Manager; ALB + EC2 ASG; CloudFront + WAF + API Gateway + CI/CD | Ping test CloudFront → API GW → ALB → EC2 → RDS thành công |
+| **10** | Backend nghiệp vụ + UI cơ bản | Auth API (JWT + Cognito); CRUD Brand Persona; Prompt engine từ Brief + Persona; React Dashboard (UI v1.0) | Đăng nhập, tạo Persona, nhập Brief, nhận Prompt tự động |
+| **11** | Luồng AI Worker end-to-end | SQS pipeline; Lambda → Gemini API → S3 + RDS; Export PDF/DOCX/HTML; Load Testing & tối ưu | Brief → AI sinh nội dung → Xuất PDF trong < 60 giây |
+| **12** | Hardening & Production | Security audit (WAF, IAM, pentest); UAT + thu feedback; Fix bug + hoàn thiện docs/runbook; Go-Live + onboard | Production live, monitoring 24/7, khách hàng đầu tiên onboard |
+
+---
+
+### 6. Ngân sách
+
+#### 6.1 Chi phí build project
+
+| Dịch vụ | Cấu hình | Chi phí/tháng |
+| --- | --- | --- |
+| Amazon EC2 | t3.medium × 2 (On-Demand, Auto Scaling min=2, 1/AZ) | ~$60 |
+| Amazon RDS PostgreSQL | db.t3.micro, Multi-AZ | ~$50 |
+| NAT Gateway | 2 AZ | ~$64 |
+| CloudFront | 100 GB transfer | ~$8 |
+| API Gateway | 1M requests | ~$3.50 |
+| CloudWatch | Logs + Metrics cơ bản | ~$5 |
+| AWS Lambda | ~100,000 invocations, 512MB | ~$1 |
+| Amazon SQS | ~500,000 requests | ~$0.20 |
+| Amazon S3 | 50 GB | ~$2 |
+| AWS Secrets Manager | 1 secret (Gemini API Key) | ~$1 |
+| AWS KMS | 1 CMK (mã hóa RDS + S3) | ~$1 |
+| Amazon Cognito | < 50,000 MAU (Free Tier) | $0 |
+| **Tổng AWS/tháng** | | **~$196** |
+
+> 💡 **Ghi chú:** ElastiCache Redis sẽ được bổ sung ở Phase 2 khi số lượng người dùng đồng thời vượt 200+, nhằm giảm tải cho RDS và tối ưu response time.
+
+#### Gemini API (Google AI)
+
+| Giai đoạn | Số lượng requests | Chi phí ước tính |
+| --- | --- | --- |
+| Dev/Staging | ~1,000/tháng | ~$1–5/tháng |
+
+#### 6.2 Chiến lược tối ưu chi phí
+
+*   **Reserved Instances:** Đặt trước EC2 và RDS 1 năm → tiết kiệm 30–40%
+*   **Lambda Serverless:** AI Worker chỉ tính phí khi có job, không tốn tiền idle
+*   **CloudFront caching:** Giảm số request tới EC2 và tải bandwidth
+*   **S3 Lifecycle Policy:** Tự động chuyển file > 90 ngày sang S3 Glacier
+*   **Auto Scaling:** Thu nhỏ về min instances ngoài giờ cao điểm
+*   **Spot Instances cho Dev:** Tiết kiệm 60–70% so với On-Demand
+
+---
+
+### 7. Rủi ro
+
+#### 7.1 Ma trận rủi ro
+
+| Rủi ro | Khả năng | Ảnh hưởng |
+| --- | --- | --- |
+| Gemini API downtime/throttle | Trung bình | Cao |
+| Chi phí Gemini API vượt ngân sách | Cao | Trung bình |
+| Lỗ hổng bảo mật dữ liệu người dùng | Thấp | Rất cao |
+| EC2 instance failure (không Multi-AZ) | Thấp | Cao |
+| RDS failover chậm | Thấp | Trung bình |
+| Lambda timeout khi Gemini chậm | Trung bình | Trung bình |
+| Chi phí AWS vượt ước tính | Trung bình | Thấp |
+| Trễ tiến độ Phase 3 (AI Integration) | Trung bình | Thấp |
+
+#### 7.2 Biện pháp giảm thiểu
+
+**Gemini API Downtime/Throttling:**
+
+*   Lambda retry với Exponential Backoff (3 lần, max 5 phút)
+*   CloudWatch Alarm khi số lượng job lỗi tăng bất thường
+*   Fallback: tích hợp OpenAI API hoặc Amazon Bedrock (Phase 2+)
+
+**Chi phí Gemini API Vượt ngân sách:**
+
+*   Giới hạn số lần gọi AI theo plan (Free: 10/tháng, Basic: 100, Pro: unlimited)
+*   Rate limiting tại API Gateway (requests/minute per user)
+*   Google Cloud Budget Alert + AWS Cost Anomaly Detection
+
+**Lỗ hổng bảo mật dữ liệu:**
+
+*   EC2, Lambda, RDS nằm trong Private Subnet (không có Public IP)
+*   KMS mã hóa data at-rest (RDS + S3); toàn bộ kết nối qua TLS 1.2+
+*   Secrets Manager thay thế hoàn toàn environment variables cho credentials
+*   WAF chặn SQL Injection, XSS, bad bots; CloudTrail audit log toàn bộ API calls
+*   Review IAM permissions định kỳ 90 ngày/lần
+
+**Lambda Timeout khi Gemini Phản hồi Chậm:**
+
+*   Lambda timeout = 270 giây (có buffer so với 300 giây max)
+*   Mỗi job chỉ sinh 1 loại nội dung (không gom nhiều loại vào 1 Lambda call)
+*   Streaming response từ Gemini API khi có thể
+*   Timeout → job tự động retry với priority cao hơn
+
+**Trễ Tiến độ Phase 3 (AI Integration):**
+
+*   Buffer 1 tuần (Tuần 12) dành cho Performance Testing và bug fix
+*   Prototype Lambda + Gemini API độc lập từ Tuần 2, song song với Phase 1
+*   Dùng Gemini API Sandbox (miễn phí) trong giai đoạn phát triển
+
+---
+
+> Tài liệu tham khảo:
+>
+> [AWS Well-Architected](https://aws.amazon.com/architecture/well-architected/)
+>
+> [Gemini API Docs](https://ai.google.dev/docs)
+>
+> [Amazon SQS Best Practices](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/best-practices.html)
