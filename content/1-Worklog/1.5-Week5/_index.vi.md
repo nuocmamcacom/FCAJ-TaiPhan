@@ -48,7 +48,7 @@ pre: " <b> 1.5. </b> "
 
 **Minh chứng thực hành:**
 
-![IAM](/static/images/1-Worklog/IAM.png)
-![MFA](/static/images/1-Worklog/MFA.png)
-![S3KMS](/static/images/1-Worklog/S3KMS.png)
-![SecretsManager](/static/images/1-Worklog/SecretsManager.png)
+![IAM](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/images/1-Worklog/IAM.png)
+![MFA](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/images/1-Worklog/MFA.png)
+![S3KMS](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/images/1-Worklog/S3KMS.png)
+![SecretsManager](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/images/1-Worklog/SecretsManager.png)

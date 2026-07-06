@@ -47,7 +47,6 @@ pre: " <b> 1.3. </b> "
   * Tạo recovery runbooks
 
 **Minh chứng thực hành:**
-
-![RDS Created](/static/images/1-Worklog/RDS.png)
-![DynamoDB](/static/images/1-Worklog/DynamoDB.png)
+![RDS Created](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/images/1-Worklog/RDS.png)
+![DynamoDB](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/images/1-Worklog/DynamoDB.png)
 

@@ -47,4 +47,4 @@ pre: " <b> 1.4. </b> "
   * Achieved 90% reduction in storage costs
 
 **Practical Evidence:**
-![S3](/static/images/1-Worklog/S3.png)
+![S3](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/images/1-Worklog/S3.png)

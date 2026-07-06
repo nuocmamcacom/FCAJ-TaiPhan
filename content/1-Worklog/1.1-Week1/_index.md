@@ -38,6 +38,6 @@ pre: " <b> 1.1. </b> "
 
 **Practical Evidence:**
 
-![Account Info](/static/images/1-Worklog/account.png)
-![MFA Login](/static/images/1-Worklog/MFA.png)
-![AWS Budget](/static/images/1-Worklog/budget.png)
+![Account Info](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/images/1-Worklog/account.png)
+![MFA Login](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/images/1-Worklog/MFA.png)
+![AWS Budget](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/images/1-Worklog/budget.png)

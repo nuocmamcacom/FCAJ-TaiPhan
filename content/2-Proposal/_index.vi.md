@@ -78,7 +78,7 @@ Sự phổ biến của LLM và khả năng tích hợp qua API mở ra cơ hộ
 
 Hệ thống triển khai trên AWS với kiến trúc nhiều lớp (multi-tier), phân tách rõ ràng giữa các tầng Edge, API, Compute, Queue, AI Worker và Data. Toàn bộ tài nguyên tính toán nằm trong **VPC (10.0.0.0/16)** trải rộng **2 Availability Zones**.
 
-> ![Architecture](/static/images/Architecture.png)
+![Architecture](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/images/Architecture.png)
 
 ### 4.2 Các thành phần kiến trúc
 

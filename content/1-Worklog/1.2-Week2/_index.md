@@ -37,13 +37,12 @@ pre: " <b> 1.2. </b> "
 **Practical Evidence:**
 
 *Creating a custom VPC and Subnet:*
-![VPC Created](/static/images/1-Worklog/vpc-created.png)
-![Subnet Created](/static/images/1-Worklog/subnet-created.png)
-
+![VPC Created](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/images/1-Worklog/vpc-created.png)
+![Subnet Created](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/images/1-Worklog/subnet-created.png)
 
 *Configuring Security Group (opening RDP port) and successfully launching a Windows EC2 instance:*
-![Security Group](/static/images/1-Worklog/security-group.png)
-![EC2 Running](/static/images/1-Worklog/ec2-running.png)
+![Security Group](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/images/1-Worklog/security-group.png)
+![EC2 Running](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/images/1-Worklog/ec2-running.png)
 
 *Successfully connecting to the AWS server via Remote Desktop:*
-![Windows Desktop RDP](/static/images/1-Worklog/window-desktop.png)
+![Windows Desktop RDP](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/images/1-Worklog/window-desktop.png)

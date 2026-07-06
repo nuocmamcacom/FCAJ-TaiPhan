@@ -37,12 +37,12 @@ pre: " <b> 1.2. </b> "
 **Minh chứng thực hành:**
 
 *Khởi tạo mạng ảo VPC và Subnet tùy chỉnh:*
-![VPC Created](/static/images/1-Worklog/vpc-created.png)
-![Subnet Created](/static/images/1-Worklog/subnet-created.png)
+![VPC Created](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/images/1-Worklog/vpc-created.png)
+![Subnet Created](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/images/1-Worklog/subnet-created.png)
 
 *Cấu hình Security Group (mở port RDP) và khởi chạy EC2 Windows thành công:*
-![Security Group](/static/images/1-Worklog/security-group.png)
-![EC2 Running](/static/images/1-Worklog/ec2-running.png)
+![Security Group](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/images/1-Worklog/security-group.png)
+![EC2 Running](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/images/1-Worklog/ec2-running.png)
 
 *Kết nối Remote Desktop thành công vào máy chủ AWS:*
-![Windows Desktop RDP](/static/images/1-Worklog/window-desktop.png)
+![Windows Desktop RDP](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/images/1-Worklog/window-desktop.png)
