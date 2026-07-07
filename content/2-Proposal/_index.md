@@ -78,7 +78,7 @@ The popularity of LLMs and the ability to integrate via APIs open the opportunit
 
 The system is deployed on AWS with a multi-tier architecture, clearly separating the Edge, API, Compute, Queue, AI Worker, and Data layers. All computing resources are located within a **VPC (10.0.0.0/16)** spanning **2 Availability Zones**.
 
-> ![Architecture](/static/images/Architecture.png)
+![Architecture](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/images/Architecture.png)
 
 ### 4.2 Architecture Components
 
