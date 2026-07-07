@@ -33,7 +33,7 @@ Kiến trúc dự tính ban đầu (xem [Proposal](/content/2-Proposal/)) có Am
 | Health Check | `/api/v1/health`, threshold mặc định |
 | Security Group | `alb-sg` (80/443 từ `0.0.0.0/0`) |
 
-![Application Load Balancer trên AWS Console](/static/images/5-Workshop/5.5-Compute/alb.png)
+![Application Load Balancer trên AWS Console](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/images/5-Workshop/5.5-Compute/alb.png)
 
 #### Auto Scaling Group
 
@@ -47,7 +47,7 @@ Kiến trúc dự tính ban đầu (xem [Proposal](/content/2-Proposal/)) có Am
 
 Khi cần deploy phiên bản mới: CI/CD gọi `autoscaling start-instance-refresh`, ASG lần lượt thay từng instance bằng bản mới, không downtime nhờ ALB vẫn phục vụ từ các instance còn lại trong lúc refresh.
 
-![Auto Scaling Group trên AWS Console](/static/images/5-Workshop/5.5-Compute/asg.png)
+![Auto Scaling Group trên AWS Console](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/images/5-Workshop/5.5-Compute/asg.png)
 
 #### Kiểm chứng
 

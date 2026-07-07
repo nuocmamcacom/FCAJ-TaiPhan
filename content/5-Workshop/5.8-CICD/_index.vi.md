@@ -18,7 +18,7 @@ GitHub Actions xác thực với AWS thông qua **OpenID Connect (OIDC)**, loạ
 
 > Lưu ý khi setup: AWS CLI **bắt buộc** tham số `--thumbprint-list` khi tạo OIDC provider, dù giá trị này không còn thực sự được GitHub Actions xác minh từ 2023 — thiếu tham số này lệnh `create-open-id-connect-provider` sẽ báo lỗi.
 
-![GitHub OIDC IAM Role trust policy](/static/images/5-Workshop/5.8-CICD/oidc-role.png)
+![GitHub OIDC IAM Role trust policy](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/images/5-Workshop/5.8-CICD/oidc-role.png)
 
 #### IAM Policy — tách riêng theo nhóm quyền
 
@@ -54,7 +54,7 @@ Hai lỗi thực tế gặp phải khi build pipeline:
 - **`docker login` fail:** `ECR_REPO_URI` có kèm path (`.../quillo-api`), nhưng `docker login` chỉ nhận hostname registry → phải tách bằng `cut -d/ -f1` trước khi truyền vào lệnh login.
 - **Cloudflare purge "thành công giả":** API Cloudflare trả **HTTP 200** ngay cả khi purge thật sự thất bại (`"success":false` nằm trong response body) → `curl -f` không đủ để phát hiện lỗi này, bắt buộc phải parse JSON response và kiểm tra field `success`.
 
-![GitHub Actions — workflow run thành công (5 job xanh)](/static/images/5-Workshop/5.8-CICD/github-actions-run.png)
+![GitHub Actions — workflow run thành công (5 job xanh)](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/images/5-Workshop/5.8-CICD/github-actions-run.png)
 
 #### Kiểm chứng
 

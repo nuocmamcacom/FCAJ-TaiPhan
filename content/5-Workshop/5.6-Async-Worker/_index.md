@@ -23,7 +23,7 @@ Calling an AI model to generate content takes anywhere from a few seconds to ten
 | Redrive Policy | `maxReceiveCount = 5` → after 5 failures, the message automatically moves to the DLQ |
 
 ![Amazon SQS Main Queue and DLQ on AWS Console](/static/images/5-Workshop/5.6-Async-Worker/sqs-main-queue.png)
-![](/static/images/5-Workshop/5.6-Async-Worker/sqs-dlq.png)
+![](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/images/5-Workshop/5.6-Async-Worker/sqs-dlq.png)
 
 #### AWS Lambda Worker
 
@@ -40,7 +40,7 @@ The Lambda Worker is written in Node.js/TypeScript and runs **inside the VPC** (
 
 The deployment package is built with esbuild (`build-lambda.sh`), bundling all dependencies into a single `index.js` file (bundle-all strategy) to avoid missing-module errors on the Lambda runtime.
 
-![AWS Lambda Worker on AWS Console](/static/images/5-Workshop/5.6-Async-Worker/lambda.png)
+![AWS Lambda Worker on AWS Console](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/images/5-Workshop/5.6-Async-Worker/lambda.png)
 
 #### Gemini API Integration
 

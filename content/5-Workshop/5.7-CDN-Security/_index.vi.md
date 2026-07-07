@@ -26,8 +26,8 @@ Hai vấn đề kỹ thuật gặp phải và cách xử lý:
 
 > Known quirk (không ảnh hưởng chức năng): S3 Static Website Hosting trả HTTP status 404 cho route SPA fallback dù nội dung `index.html` vẫn load đúng — vì S3 không rewrite status code như CloudFront.
 
-![Cloudflare DNS](/static/images/5-Workshop/5.7-CDN-Security/cloudflare-records.png)
-![Cloud Connector config](/static/images/5-Workshop/5.7-CDN-Security/cloudflare-connector-config.png)
+![Cloudflare DNS](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/images/5-Workshop/5.7-CDN-Security/cloudflare-records.png)
+![Cloud Connector config](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/images/5-Workshop/5.7-CDN-Security/cloudflare-connector-config.png)
 
 #### AWS WAF
 
@@ -40,7 +40,7 @@ Hai vấn đề kỹ thuật gặp phải và cách xử lý:
 
 WAF chặn request **trước khi** chạm tới EC2 — đã kiểm thử thực tế bằng payload SQL Injection/XSS gửi trực tiếp qua domain thật, xác nhận trả về `403 Forbidden`.
 
-![AWS WAF WebACL rules](/static/images/5-Workshop/5.7-CDN-Security/waf.png)
+![AWS WAF WebACL rules](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/images/5-Workshop/5.7-CDN-Security/waf.png)
 
 #### CloudWatch & SNS Alerting
 
@@ -58,7 +58,7 @@ WAF chặn request **trước khi** chạm tới EC2 — đã kiểm thử thự
 
 Cả 3 Alarm gửi thông báo qua **SNS Topic** (`quillo-prod-alerts`) tới email — cảnh báo chủ động thay vì phải tự kiểm tra log thủ công.
 
-![CloudWatch Alarms + SNS Topic](/static/images/5-Workshop/5.7-CDN-Security/cloudwatch.png)
+![CloudWatch Alarms + SNS Topic](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/images/5-Workshop/5.7-CDN-Security/cloudwatch.png)
 
 > **Lưu ý:** Alarm `TargetTracking-quillo-api-asg-AlarmLow-...` ở trạng thái "In alarm" là **hành vi thiết kế bình thường**, không phải sự cố — đây là alarm nội bộ do Target Tracking Scaling Policy của Auto Scaling Group tự tạo, cố ý kích hoạt khi CPU trung bình xuống thấp để ra lệnh scale-in (giảm bớt instance khi tải thấp). 3 alarm nghiệp vụ thật (`quillo_api_error_rate_high`, `quillo_worker_error_rate_high`, `quillo_waf_blocked_requests_high`) đều ở trạng thái `OK`.
 

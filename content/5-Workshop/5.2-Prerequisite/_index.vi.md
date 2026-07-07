@@ -60,7 +60,7 @@ Gắn policy sau (hoặc tương đương, thu hẹp dần theo nguyên tắc le
 }
 ```
 
-> Đây là policy dùng trong giai đoạn triển khai/dev. Ở production, các IAM Role gắn cho EC2/Lambda (`quillo-ec2-role`, `quillo-lambda-role`, `quillo-github-actions-deploy-role`) được thu hẹp scope theo từng resource cụ thể — chi tiết ở mục [5.3 Networking](../5.3-networking/) và các mục IAM riêng liên quan.
+> Đây là policy dùng trong giai đoạn triển khai/dev. Ở production, các IAM Role gắn cho EC2/Lambda (`quillo-ec2-role`, `quillo-lambda-role`, `quillo-github-actions-deploy-role`) được thu hẹp scope theo từng resource cụ thể — chi tiết ở mục [5.3 Networking](../5.3-Networking/) và các mục IAM riêng liên quan.
 
 #### Chuẩn bị Local Dev (tùy chọn, để test trước khi deploy)
 

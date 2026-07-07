@@ -18,7 +18,7 @@ GitHub Actions authenticates with AWS via **OpenID Connect (OIDC)**, entirely re
 
 > Setup note: the AWS CLI **requires** the `--thumbprint-list` parameter when creating an OIDC provider, even though this value hasn't actually been verified by GitHub Actions since 2023 — omitting it causes the `create-open-id-connect-provider` command to fail.
 
-![GitHub OIDC IAM Role trust policy](/static/images/5-Workshop/5.8-CICD/oidc-role.png)
+![GitHub OIDC IAM Role trust policy](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/images/5-Workshop/5.8-CICD/oidc-role.png)
 
 #### IAM Policy — Split by Permission Group
 
@@ -54,7 +54,7 @@ Two real issues encountered while building the pipeline:
 - **`docker login` failure:** `ECR_REPO_URI` includes a path (`.../quillo-api`), but `docker login` only accepts the registry hostname → it must be split with `cut -d/ -f1` before being passed to the login command.
 - **False-positive Cloudflare purge:** Cloudflare's API returns **HTTP 200** even when the purge actually fails (`"success":false` in the response body) → `curl -f` alone can't catch this; the JSON response body must be parsed and the `success` field checked.
 
-![GitHub Actions — successful workflow run (5 green jobs)](/static/images/5-Workshop/5.8-CICD/github-actions-run.png)
+![GitHub Actions — successful workflow run (5 green jobs)](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/images/5-Workshop/5.8-CICD/github-actions-run.png)
 
 #### Verification
 

@@ -22,7 +22,7 @@ The application (EC2 API and Lambda Worker) only connects to the **RDS Primary e
 
 The schema is managed with Prisma ORM (11 tables), migrated via `npx prisma migrate deploy` — run remotely through SSM Session Manager port-forwarding (port 5432 is never exposed to the internet).
 
-![RDS Multi-AZ on AWS Console](/static/images/5-Workshop/5.4-Data-Cache/rds-multi-az.png)
+![RDS Multi-AZ on AWS Console](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/images/5-Workshop/5.4-Data-Cache/rds-multi-az.png)
 
 #### ElastiCache Redis
 
@@ -35,7 +35,7 @@ The schema is managed with Prisma ORM (11 tables), migrated via `npx prisma migr
 
 Redis is only accessed by the **EC2 (Express API)** — the Lambda Worker does not connect to Redis, since asynchronous AI jobs read the persona directly from RDS when processing.
 
-![ElastiCache Redis on AWS Console](/static/images/5-Workshop/5.4-Data-Cache/elasticache-redis.png)
+![ElastiCache Redis on AWS Console](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/images/5-Workshop/5.4-Data-Cache/elasticache-redis.png)
 
 #### AWS Secrets Manager
 
@@ -50,7 +50,7 @@ The secret-loading mechanism (`loadSecrets()`) runs **before** any other module 
 
 EC2 and Lambda use separate IAM Roles (`quillo-ec2-role`, `quillo-lambda-role`) to read secrets — no static access key is ever stored on the instance or in the code.
 
-![Secrets Manager on AWS Console](/static/static/images/5-Workshop/5.4-Data-Cache/secrets-manager.png)
+![Secrets Manager on AWS Console](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/static/images/5-Workshop/5.4-Data-Cache/secrets-manager.png)
 
 #### Verification
 

@@ -21,7 +21,7 @@ Toàn bộ hạ tầng nằm trong 1 VPC riêng (không dùng Default VPC), tr�
 
 Triển khai bằng script `infrastructure/scripts/setup-vpc.sh`: tạo VPC, Subnet, Route Table, Internet Gateway, NAT Gateway và 4 Security Group tương ứng.
 
-![VPC và Subnet trên AWS Console](/static/images/5-Workshop/5.3-networking/vpc-subnets.png)
+![VPC và Subnet trên AWS Console](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/images/5-Workshop/5.3-networking/vpc-subnets.png)
 
 #### Security Groups
 
@@ -35,7 +35,7 @@ Triển khai bằng script `infrastructure/scripts/setup-vpc.sh`: tạo VPC, Sub
 
 > Nguyên tắc: mỗi tầng chỉ mở đúng port cần thiết, chỉ cho phép nguồn là Security Group của tầng liền kề — không mở theo dải IP tĩnh.
 
-![Security Group rules](/static/images/5-Workshop/5.3-networking/security-groups.png)
+![Security Group rules](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/images/5-Workshop/5.3-networking/security-groups.png)
 
 #### IAM Roles
 
@@ -47,7 +47,7 @@ Triển khai bằng script `infrastructure/scripts/setup-vpc.sh`: tạo VPC, Sub
 
 Lambda và EC2 dùng 2 Role **tách biệt** (không dùng chung) theo nguyên tắc least-privilege — giảm phạm vi ảnh hưởng nếu 1 trong 2 bị lộ quyền.
 
-![IAM Roles summary](/static/images/5-Workshop/5.3-networking/iam-roles.png)
+![IAM Roles summary](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/images/5-Workshop/5.3-networking/iam-roles.png)
 
 #### Kiểm chứng
 

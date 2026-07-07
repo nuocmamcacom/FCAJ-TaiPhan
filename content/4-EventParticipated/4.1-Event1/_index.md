@@ -197,3 +197,4 @@ CloudFront is not just a CDN but a **comprehensive foundation** for any modern w
 ---
 
 ### Some photos from the event
+> ![join_event](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/images/4-Event/Event-1.png)

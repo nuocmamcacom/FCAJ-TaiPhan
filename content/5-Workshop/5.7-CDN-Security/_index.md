@@ -26,8 +26,8 @@ Two technical issues encountered and how they were resolved:
 
 > Known quirk (doesn't affect functionality): S3 Static Website Hosting returns an HTTP 404 status for the SPA fallback route even though the `index.html` content still loads correctly — because S3 doesn't rewrite status codes the way CloudFront does.
 
-![Cloudflare DNS](/static/images/5-Workshop/5.7-CDN-Security/cloudflare-records.png)
-![Cloud Connector config](/static/images/5-Workshop/5.7-CDN-Security/cloudflare-connector-config.png)
+![Cloudflare DNS](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/images/5-Workshop/5.7-CDN-Security/cloudflare-records.png)
+![Cloud Connector config](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/images/5-Workshop/5.7-CDN-Security/cloudflare-connector-config.png)
 
 #### AWS WAF
 
@@ -40,7 +40,7 @@ Two technical issues encountered and how they were resolved:
 
 WAF blocks requests **before** they reach EC2 — verified in practice by sending SQL Injection/XSS payloads directly through the real domain and confirming a `403 Forbidden` response.
 
-![AWS WAF WebACL rules](/static/images/5-Workshop/5.7-CDN-Security/waf.png)
+![AWS WAF WebACL rules](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/images/5-Workshop/5.7-CDN-Security/waf.png)
 
 #### CloudWatch & SNS Alerting
 
@@ -58,7 +58,7 @@ WAF blocks requests **before** they reach EC2 — verified in practice by sendin
 
 All 3 alarms send notifications via an **SNS Topic** (`quillo-prod-alerts`) to email — proactive alerting instead of manually checking logs.
 
-![CloudWatch Alarms + SNS Topic](/static/images/5-Workshop/5.7-CDN-Security/cloudwatch.png)
+![CloudWatch Alarms + SNS Topic](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/images/5-Workshop/5.7-CDN-Security/cloudwatch.png)
 
 > **Note:** The `TargetTracking-quillo-api-asg-AlarmLow-...` alarm showing "In alarm" is **expected behavior, not an incident** — it's an internal alarm auto-created by the Auto Scaling Group's Target Tracking Scaling Policy, intentionally triggered when average CPU drops low to signal a scale-in (reducing instance count under low load). The 3 real business alarms (`quillo_api_error_rate_high`, `quillo_worker_error_rate_high`, `quillo_waf_blocked_requests_high`) are all in the `OK` state.
 

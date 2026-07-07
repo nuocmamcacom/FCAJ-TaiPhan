@@ -19,13 +19,13 @@ Manual testing was performed on the actual production domain (`https://quillo.kh
 | 5 | Export the content to PDF | The file correctly renders Vietnamese text (Noto Sans font), downloaded via a presigned URL |
 | 6 | Check the Usage page | Tokens consumed increase to match the generation just performed |
 
-![Generate & Poll — AI content successfully generated on the real production domain, DevTools showing the correct 2.5s polling mechanism](/static/static/images/5-Workshop/5.9-Testing/generate-poll.png)
+![Generate & Poll — AI content successfully generated on the real production domain, DevTools showing the correct 2.5s polling mechanism](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/static/images/5-Workshop/5.9-Testing/generate-poll.png)
 *Figure 5.9.1: Generate & Poll — AI content successfully generated on the real production domain, DevTools showing the correct 2.5s polling mechanism*
 
-![Export PDF — correctly renders Vietnamese text (Noto Sans font)](/static/images/5-Workshop/5.9-Testing/export-pdf.png)
+![Export PDF — correctly renders Vietnamese text (Noto Sans font)](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/images/5-Workshop/5.9-Testing/export-pdf.png)
 *Figure 5.9.2: Export PDF — correctly renders Vietnamese text (Noto Sans font)*
 
-![Usage page — token consumption correctly updated after generation](/static/images/5-Workshop/5.9-Testing/usage-page.png)
+![Usage page — token consumption correctly updated after generation](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/images/5-Workshop/5.9-Testing/usage-page.png)
 *Figure 5.9.2: Usage page — token consumption correctly updated after generation*
 
 > *The 1,000,000 tokens/month limit is a demo configuration for the test organization (PRO plan), used to support multiple consecutive generation runs during testing — not the default value for a real customer.*

@@ -19,13 +19,13 @@ Thực hiện kiểm thử thủ công toàn bộ luồng chính trên domain pr
 | 5 | Export nội dung ra PDF | File có font tiếng Việt hiển thị đúng (Noto Sans), tải qua presigned URL |
 | 6 | Kiểm tra trang Usage | Token đã dùng tăng đúng theo lần generate vừa thực hiện |
 
-![Generate & Poll — nội dung AI sinh ra thành công trên domain thật, DevTools thể hiện đúng cơ chế polling 2.5s](/static/images/5-Workshop/5.9-Testing/generate-poll.png)
+![Generate & Poll — nội dung AI sinh ra thành công trên domain thật, DevTools thể hiện đúng cơ chế polling 2.5s](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/images/5-Workshop/5.9-Testing/generate-poll.png)
 *Hình 5.9.1: Generate & Poll — nội dung AI sinh ra thành công trên domain thật, DevTools thể hiện đúng cơ chế polling 2.5s*
 
-![Export PDF — hiển thị đúng tiếng Việt (font Noto Sans)](/static/images/5-Workshop/5.9-Testing/export-pdf.png)
+![Export PDF — hiển thị đúng tiếng Việt (font Noto Sans)](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/images/5-Workshop/5.9-Testing/export-pdf.png)
 *Hình 5.9.2: Export PDF — hiển thị đúng tiếng Việt (font Noto Sans)*
 
-![Trang Usage — token tiêu thụ cập nhật đúng sau khi generate](/static/images/5-Workshop/5.9-Testing/usage-page.png)
+![Trang Usage — token tiêu thụ cập nhật đúng sau khi generate](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/images/5-Workshop/5.9-Testing/usage-page.png)
 *Hình 5.9.2: Trang Usage — token tiêu thụ cập nhật đúng sau khi generate*
 
 > *Hạn mức 1.000.000 token/tháng là cấu hình demo cho tổ chức test (plan PRO), phục vụ nhiều lượt generate liên tục khi kiểm thử — không phải giá trị mặc định cho khách hàng thật.*

@@ -26,7 +26,7 @@ The system follows a multi-tier architecture inside a dedicated VPC, spanning tw
 - **Security & operations:** Secrets Manager, KMS, WAF, CloudWatch/SNS, CI/CD via GitHub Actions (OIDC).
 
 ![AI Content Generator Platform architecture](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/images/5-Workshop/5.1-Workshop-overview/Architecture.png)
-
+![AI Content Generator Platform architecture](static/images/5-Workshop/5.1-Workshop-overview/Architecture.png)
 #### Tech Stack
 
 | Layer | Technology |
