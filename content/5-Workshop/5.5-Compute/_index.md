@@ -1,0 +1,60 @@
+---
+title: "Compute"
+date: 2026-07-01
+weight: 5
+chapter: false
+pre: " <b> 5.5. </b> "
+---
+
+#### Packaging the Application with Docker
+
+The Express backend API is packaged using a **multi-stage** Dockerfile:
+
+| Stage | Role |
+|---|---|
+| `builder` | Installs dependencies, runs `prisma generate`, compiles TypeScript (`tsc`) |
+| `runtime` | `node:20-slim` image, copies only the required `dist/` + `node_modules`, runs as a **non-root user**, includes a `HEALTHCHECK` |
+
+The image is built with `--platform linux/amd64` (to avoid arm64/amd64 architecture mismatches when building on Apple Silicon) and pushed to **Amazon ECR** (`quillo-api`, with `scanOnPush` enabled).
+
+#### Why Not Cognito + API Gateway — A Simplification from the Original Plan
+
+The originally planned architecture (see the [Proposal](/2-proposal/)) placed Amazon API Gateway + a Cognito Authorizer in front of an internal ALB. During actual implementation, the team decided to simplify the authentication layer: using **self-managed JWTs (access token + refresh token rotation)** directly inside the Express API, with the **ALB set to internet-facing** to receive traffic directly — removing the API Gateway/Cognito/VPC Link layer entirely.
+
+This was a **deliberate decision made from the start of the project** (unlike the CloudFront case in section 5.7, which was an objective external blocker) — at the scale of a single application, self-managed JWT sufficiently meets the security requirements without the added latency, cost, and operational complexity of an extra API Gateway + Cognito User Pool layer.
+
+#### Application Load Balancer
+
+| Parameter | Value |
+|---|---|
+| Type | Internet-facing, in the public subnet |
+| Listener | HTTP:80 → Target Group |
+| Target Group | Port 3001, protocol HTTP |
+| Health Check | `/api/v1/health`, default threshold |
+| Security Group | `alb-sg` (80/443 from `0.0.0.0/0`) |
+
+![Application Load Balancer on AWS Console](/static/images/5-Workshop/5.5-compute/alb.png)
+
+#### Auto Scaling Group
+
+| Parameter | Value |
+|---|---|
+| Launch Template | Amazon Linux 2023, `t3.small`, user-data pulls the image from ECR and runs the container on boot |
+| Min / Max | 2 / 4 |
+| AZ Spread | At least 1 instance per AZ (2 private app subnets) |
+| Scaling Policy | Target tracking on average CPU at 60% |
+| Health Check | ELB health check (not just the EC2 status check) — instances marked unhealthy by the ALB are replaced |
+
+To deploy a new version: CI/CD calls `autoscaling start-instance-refresh`, and the ASG replaces instances one at a time with the new version — no downtime, since the ALB keeps serving traffic from the remaining instances during the refresh.
+
+![Auto Scaling Group on AWS Console](/static/images/5-Workshop/5.5-compute/asg.png)
+
+#### Verification
+
+```bash
+aws elbv2 describe-target-health --target-group-arn <tg-arn> --region ap-southeast-1
+aws autoscaling describe-auto-scaling-groups --auto-scaling-group-names quillo-api-asg --region ap-southeast-1 \
+  --query "AutoScalingGroups[0].[MinSize,MaxSize,Instances[].HealthStatus]"
+curl -I http://<alb-dns-name>/api/v1/health
+```
+> **Expected result:** `describe-target-health` returns all targets with `"State": "healthy"`; the ASG returns `MinSize=2`, with every instance showing `HealthStatus: "Healthy"`; `curl` returns `HTTP/1.1 200 OK`.

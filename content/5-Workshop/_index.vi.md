@@ -6,23 +6,20 @@ chapter: false
 pre: " <b> 5. </b> "
 ---
 
-# Truy Cập S3 An Toàn Trong Mô Hình Hybrid Bằng VPC Endpoint
-
 #### Tổng quan
-
-**AWS PrivateLink** cung cấp kết nối riêng tư đến các dịch vụ AWS từ VPC và cả mạng on-premises, mà không đưa lưu lượng ra Internet công cộng.
-
-Trong lab này, bạn sẽ học cách tạo, cấu hình và kiểm tra các VPC endpoint để workload truy cập dịch vụ AWS mà không phải đi qua Internet công cộng.
-
-Bạn sẽ tạo hai loại endpoint để truy cập Amazon S3: Gateway VPC endpoint và Interface VPC endpoint. Hai loại này có lợi thế khác nhau tùy việc bạn truy cập S3 từ cloud hay từ vị trí on-premises.
-- **Gateway** - Tạo gateway endpoint để gửi lưu lượng đến Amazon S3 hoặc DynamoDB bằng địa chỉ IP riêng. Lưu lượng từ VPC được định tuyến đến gateway endpoint thông qua route table.
-- **Interface** - Tạo interface endpoint để gửi lưu lượng đến các endpoint service sử dụng Network Load Balancer để phân phối lưu lượng. Lưu lượng đến service được phân giải bằng DNS.
-
+ 
+Mục này trình bày chi tiết quá trình tự triển khai dự án workshop — **AI Content Generator Platform**, nền tảng SaaS đa tenant tự động hóa sản xuất nội dung marketing bằng Generative AI (Gemini API), triển khai đầy đủ trên hạ tầng AWS thật (VPC, RDS Multi-AZ, EC2 Auto Scaling, SQS/Lambda, WAF, CI/CD) trong 4 tuần (Tuần 9–12).
+ 
+Toàn bộ nội dung dưới đây là báo cáo thực tế đã triển khai.
+ 
 #### Nội dung
-
-1. [Tổng quan workshop](5.1-Workshop-overview)
-2. [Chuẩn bị](5.2-Prerequiste/)
-3. [Truy cập S3 từ VPC](5.3-S3-vpc/)
-4. [Truy cập S3 từ on-premises](5.4-S3-onprem/)
-5. [Chính sách VPC Endpoint (phần thêm)](5.5-Policy/)
-6. [Dọn dẹp](5.6-Cleanup/)
+1. [Tổng quan dự án](5.1-Workshop-Overview/)
+2. [Chuẩn bị](5.2-Prerequisite/)
+3. [Networking — VPC, Subnet, Security Group, IAM Role](5.3-Networking/)
+4. [Dữ liệu & Cache — RDS Multi-AZ, ElastiCache Redis, Secrets Manager](5.4-Data-Cache/)
+5. [Compute — ALB, Auto Scaling Group, Docker](5.5-Compute/)
+6. [Xử lý bất đồng bộ — SQS, Lambda Worker, Gemini API](5.6-Async-Worker/)
+7. [CDN & Bảo mật — S3+Cloudflare, WAF, CloudWatch](5.7-CDN-Security/)
+8. [CI/CD — GitHub Actions + OIDC](5.8-CICD/)
+9. [Kiểm thử & Vận hành](5.9-Testing/)
+10. [Dọn dẹp tài nguyên](5.10-Cleanup/)

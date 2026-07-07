@@ -1,18 +1,48 @@
 ---
-title : "Giới thiệu"
-date : 2024-01-01
+title : "Tổng quan dự án"
+date : 2026-07-01
 weight : 1
 chapter : false
 pre : " <b> 5.1. </b> "
 ---
 
-#### VPC endpoints
-- **VPC endpoints** là các thiết bị ảo. Chúng là thành phần VPC có khả năng mở rộng theo chiều ngang, dự phòng và có tính sẵn sàng cao. Chúng cho phép giao tiếp giữa tài nguyên tính toán của bạn và các dịch vụ AWS mà không làm tăng rủi ro về tính sẵn sàng.
-- Tài nguyên tính toán chạy trong VPC có thể truy cập **Amazon S3** bằng Gateway endpoint. Interface endpoint của PrivateLink có thể được dùng bởi tài nguyên chạy trong VPC hoặc trong môi trường on-premises.
+#### Bối cảnh
 
-#### Tổng quan workshop
-Trong workshop này, bạn sẽ sử dụng hai VPC.
-- **"VPC Cloud"** dành cho tài nguyên cloud như **Gateway endpoint** và một EC2 instance để kiểm tra.
-- **"VPC On-Prem"** mô phỏng môi trường on-premises như nhà máy hoặc trung tâm dữ liệu của doanh nghiệp. Một EC2 instance chạy phần mềm strongSwan VPN đã được triển khai trong "VPC On-prem" và được cấu hình tự động để thiết lập đường hầm Site-to-Site VPN với AWS Transit Gateway. VPN này mô phỏng kết nối từ on-premises đến AWS cloud. Để giảm chi phí, workshop chỉ cấp phát một instance VPN. Khi triển khai cho workload thực tế, AWS khuyến nghị dùng nhiều thiết bị VPN để đạt tính sẵn sàng cao.
+**AI Content Generator Platform** là dự án workshop tốt nghiệp, được triển khai trong 4 tuần (Tuần 9–12) trên hạ tầng AWS thật (region `ap-southeast-1`). Đây là nền tảng SaaS đa tenant, tự động hóa sản xuất nội dung marketing (bài blog, mạng xã hội, quảng cáo, email) bằng Generative AI, dựa trên khái niệm **Brand Persona** — mọi nội dung sinh ra đều bám theo đúng giọng thương hiệu do người dùng định nghĩa trước.
 
-![overview](/images/5-Workshop/5.1-Workshop-overview/diagram1.png)
+**Repository:** [github.com/Chubekho/Quillo](https://github.com/Chubekho/Quillo)
+
+#### Vấn đề giải quyết
+
+Doanh nghiệp vừa và nhỏ (SMB) thường mất 3–7 ngày cho một vòng sản xuất nội dung (brief → viết → duyệt → chỉnh sửa → đăng), chi phí thuê Copywriter/Agency dao động $500–3,000/tháng, và khó giữ nhất quán giọng thương hiệu khi nhiều người cùng viết. Dự án giải quyết cả 3 vấn đề bằng một pipeline AI bất đồng bộ, rút thời gian sinh nội dung xuống dưới 60 giây/bộ.
+
+#### Kiến trúc tổng quan
+
+Hệ thống triển khai theo mô hình multi-tier trong 1 VPC riêng, trải 2 Availability Zone để đảm bảo tính sẵn sàng cao:
+- **Frontend:** React SPA, lưu trữ trên S3 Static Website, phân phối qua Cloudflare (thay thế CloudFront — lý do nêu ở mục 5.7).
+- **Backend:** Node.js/Express API chạy trên EC2, đứng sau Application Load Balancer + Auto Scaling Group.
+- **Xử lý AI bất đồng bộ:** API đẩy job vào SQS, Lambda Worker tiêu thụ job, gọi Gemini API, lưu kết quả vào S3/RDS.
+- **Dữ liệu:** PostgreSQL trên RDS Multi-AZ, cache bằng ElastiCache Redis.
+- **Bảo mật & vận hành:** Secrets Manager, KMS, WAF, CloudWatch/SNS, CI/CD qua GitHub Actions (OIDC).
+
+![Kiến trúc hệ thống AI Content Generator Platform](/static/images/5-Workshop/5.1-Workshop-overview/Architecture.png)
+
+#### Tech stack
+
+| Lớp | Công nghệ |
+|---|---|
+| Frontend | React 18, Vite, TypeScript, Zustand, TanStack Query, Tailwind CSS |
+| Backend | Node.js, Express, TypeScript, Prisma ORM |
+| Database | PostgreSQL (Amazon RDS Multi-AZ) |
+| AI | Gemini 2.5 Flash / Flash-Lite (qua lớp abstraction provider) |
+| Queue & Worker | Amazon SQS + AWS Lambda |
+| Cache | ElastiCache Redis |
+| CDN/Proxy | S3 Static Website + Cloudflare |
+| CI/CD | GitHub Actions (xác thực AWS qua OIDC) |
+
+#### Kết quả đạt được
+
+- Hệ thống production chạy thật trên domain riêng, HTTPS, vượt qua kiểm thử full-flow (đăng ký → tạo Brand Persona → sinh nội dung AI → export PDF/DOCX/HTML → theo dõi usage).
+- Pipeline CI/CD tự động: push code lên nhánh chính là production tự cập nhật, không thao tác tay.
+- Vượt qua bài kiểm thử tấn công cơ bản nhờ AWS WAF (chặn payload SQL Injection/XSS).
+- Thời gian sinh 1 bộ nội dung AI trung bình dưới 60 giây, đúng mục tiêu đề ra trong Proposal.
