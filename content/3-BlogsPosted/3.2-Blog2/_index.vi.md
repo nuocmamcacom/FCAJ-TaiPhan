@@ -1,28 +1,37 @@
 ---
-title: "Blog 2"
-date: 2024-01-01
-weight: 1
-chapter: false
-pre: " <b> 3.2. </b> "
+title: "[AWS Security] Bảo mật Serverless không chỉ là một lớp bảo vệ"
+date: 2026-07-06
+weight: 2
+draft: false
 ---
 
-# SESSION POLICIES TRONG AMAZON EKS POD IDENTITY
+## [AWS Security] Bảo mật Serverless không chỉ là một lớp bảo vệ
 
-Amazon EKS Pod Identity vừa bổ sung tính năng session policies, cho phép bạn thu hẹp quyền IAM một cách linh hoạt và chính xác cho từng pod mà không cần tạo thêm nhiều IAM roles riêng biệt. Đây là bước tiến quan trọng giúp áp dụng nguyên tắc least privilege hiệu quả hơn trong môi trường Kubernetes quy mô lớn.
+Serverless giúp giảm bớt gánh nặng trong việc quản lý máy chủ, nhưng điều đó không có nghĩa là hệ thống sẽ tự động an toàn. Với kiến trúc microservices sử dụng serverless, mỗi API, hàm Lambda, thông tin bí mật (secret) hoặc cơ sở dữ liệu đều có thể trở thành điểm yếu nếu được cấu hình không đúng.
 
-Các điểm chính cần nắm:
+Vì vậy, bảo mật không nên chỉ dựa vào một lớp duy nhất như WAF hoặc API Gateway. Kiến trúc nên áp dụng nguyên tắc **defense-in-depth (phòng thủ nhiều lớp)**, nghĩa là triển khai nhiều lớp bảo vệ kế tiếp nhau để nếu một lớp bị vượt qua thì các lớp còn lại vẫn có thể giảm thiểu thiệt hại.
 
-* Session policy là một IAM policy inline được chỉ định khi tạo hoặc cập nhật Pod Identity association.
-* Quyền hiệu quả = intersection (giao) giữa permissions của IAM role và session policy → session policy chỉ có thể thu hẹp, không thể mở rộng quyền.
-* Giúp tránh tình trạng over-permissioning khi reuse chung một IAM role cho nhiều workloads có nhu cầu khác nhau.
-* Hỗ trợ cả same-account và cross-account (qua IAM role chaining).
-* Giảm đáng kể số lượng IAM roles cần quản lý, tránh chạm giới hạn quota IAM trong cluster lớn.
-* Cấu hình dễ dàng qua AWS Management Console, AWS CLI hoặc AWS SDK khi tạo association giữa Kubernetes ServiceAccount và IAM role.
+### 7 lớp bảo vệ chính trong kiến trúc AWS
 
-Tính năng này đặc biệt hữu ích khi bạn có nhiều ứng dụng chạy trên cùng một IAM role nhưng cần giới hạn quyền khác nhau (ví dụ: một pod chỉ đọc S3 bucket cụ thể, pod khác chỉ gọi một số API nhất định).
+*   **Edge Protection:** Bảo vệ lưu lượng truy cập đầu vào bằng CloudFront, AWS WAF và AWS Shield.
+*   **Identity Protection:** Xác thực người dùng và kiểm soát quyền truy cập bằng Amazon Cognito.
+*   **API Protection:** Bảo vệ API, xác thực token, triển khai giới hạn tốc độ (rate limiting) và mã hóa kết nối bằng Amazon API Gateway.
+*   **Network Isolation:** Cô lập các tài nguyên nhạy cảm bằng VPC, Security Groups, Network ACLs và VPC Endpoints.
+*   **Compute Security:** Bảo mật Lambda bằng nguyên tắc IAM Least Privilege, AWS KMS, Resource-based Policies và Code Signing.
+*   **Secrets Protection:** Quản lý thông tin xác thực, API Key và các dữ liệu nhạy cảm bằng AWS Secrets Manager.
+*   **Data Protection:** Bảo vệ dữ liệu bằng mã hóa DynamoDB, kiểm soát quyền truy cập và cơ chế sao lưu (backup).
 
-...Hình ảnh...
+### Giám sát liên tục
 
-...Link...
+Bên cạnh 7 lớp bảo vệ trên, hệ thống cần được giám sát liên tục bằng GuardDuty, CloudTrail, CloudWatch, Security Hub và Amazon Bedrock để phát hiện bất thường, theo dõi hoạt động và hỗ trợ phân tích các vấn đề bảo mật.
 
-...Hướng dẫn...
+### Ưu điểm
+
+Kiến trúc này không phụ thuộc vào một lớp bảo vệ duy nhất. Nếu AWS WAF bị vượt qua, hệ thống vẫn còn API Gateway, Cognito, IAM, Secrets Manager và các dịch vụ giám sát hoạt động phía sau để giảm phạm vi ảnh hưởng của sự cố (blast radius).
+
+### Kết luận
+
+Serverless giúp giảm khối lượng công việc quản lý máy chủ nhưng không loại bỏ trách nhiệm về bảo mật. Đối với các hệ thống chạy trong môi trường production, bảo mật cần được thiết kế ngay từ đầu, bao phủ toàn bộ các thành phần như lưu lượng truy cập, xác thực, API, mạng, Lambda, secrets, dữ liệu và giám sát.
+
+---
+**Tham khảo:** [AWS Security Blog - Building an AI-powered defense-in-depth security architecture for serverless microservices](https://aws.amazon.com/vi/blogs/security/building-an-ai-powered-defense-in-depth-security-architecture-for-serverless-microservices/)
