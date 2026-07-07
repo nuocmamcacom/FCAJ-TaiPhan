@@ -238,6 +238,4 @@ FCAJ Community Day là một trong những sự kiện AWS community chất lư�
 
 ### Một số hình ảnh khi tham gia sự kiện
 
-> ![join_event](/images/events/event2/join_event.png)
->
-> ![ss](/images/events/event2/ss.png)
+> ![join_event](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/images/4-Event/Event-1.png)

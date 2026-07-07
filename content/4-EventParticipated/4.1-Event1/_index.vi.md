@@ -198,4 +198,4 @@ CloudFront không chỉ là CDN mà là **nền tảng toàn diện** cho mọi 
 
 ### Một số hình ảnh khi tham gia sự kiện
 
-
+> ![join_event](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/images/4-Event/Event-1.png)

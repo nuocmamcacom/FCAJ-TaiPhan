@@ -237,6 +237,4 @@ FCAJ Community Day is one of the highest-quality AWS community events I have att
 
 ### Some Photos from the Event
 
-> ![join_event](/images/events/event2/join_event.png)
->
-> ![ss](/images/events/event2/ss.png)
+> ![join_event](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/images/4-Event/Event-1.png)
