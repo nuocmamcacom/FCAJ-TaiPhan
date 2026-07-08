@@ -50,7 +50,7 @@ The secret-loading mechanism (`loadSecrets()`) runs **before** any other module 
 
 EC2 and Lambda use separate IAM Roles (`quillo-ec2-role`, `quillo-lambda-role`) to read secrets — no static access key is ever stored on the instance or in the code.
 
-![Secrets Manager on AWS Console](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/static/images/5-Workshop/5.4-Data-Cache/secrets-manager.png)
+![Secrets Manager on AWS Console](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/images/5-Workshop/5.4-Data-Cache/secrets-manager.png)
 
 #### Verification
 

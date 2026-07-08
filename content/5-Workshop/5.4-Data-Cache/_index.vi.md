@@ -22,7 +22,7 @@ pre: " <b> 5.4. </b> "
 
 Schema quản lý bằng Prisma ORM, 11 bảng, migrate qua `npx prisma migrate deploy` — chạy từ xa bằng SSM Session Manager port-forwarding (không mở port 5432 ra Internet).
 
-![RDS Multi-AZ trên AWS Console](/images/5-Workshop/5.4-data-cache/rds-multi-az.png)
+![RDS Multi-AZ trên AWS Console](https://raw.githubusercontent.com/nuocmamcacom/FCAJ-TaiPhan/main/static/images/5-Workshop/5.4-Data-Cache/rds-multi-az.png)
 
 #### ElastiCache Redis
 
