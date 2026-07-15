@@ -21,4 +21,4 @@ pre: " <b> 1. </b> "
 | [Tuần 9](1.9-week9/) | 15/06/2026 - 21/06/2026    | CloudFormation, Terraform và infrastructure as code |
 | [Tuần 10](1.10-week10/) | 22/06/2026 - 28/06/2026 | API Gateway, AppSync và tích hợp ứng dụng |
 | [Tuần 11](1.11-week11/) | 29/06/2026 - 05/07/2026 | Glue, Athena, phân tích dữ liệu và báo cáo |
-| [Tuần 12](1.12-week12/) | 06/07/2026 - 12/07/2026 | Thiết kế giải pháp cuối kỳ, thuyết trình, hoàn thiện tài liệu và tổng kết |
+| [Tuần 12](1.12-week12/) | 06/07/2026 - 30/07/2026 | Thiết kế giải pháp cuối kỳ, thuyết trình, hoàn thiện tài liệu và tổng kết |
