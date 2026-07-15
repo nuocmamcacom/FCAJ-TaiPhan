@@ -18,8 +18,8 @@ Repository: https://github.com/nuocmamcacom/FCAJ-TaiPhan
 ## Thông tin thực tập
 
 - **Company / Program:** Bootcamp First Cloud AI Journey
-- **Position:** Cloud Engineer
-- **Duration:** April 17, 2026 – July 10, 2026
+- **Position:** Workforce Bootcamp 
+- **Duration:** April 17, 2026 – July 30, 2026
 
 ---
 
